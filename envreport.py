@@ -7,14 +7,15 @@ import json
 import hashlib
 from tfe_tools.common import sanitize_path, tfe_token, get_requests_session, mod_dependencies
 from projects import project_types
+from tfe.core.workspace import Workspace
+
 class WorkspaceAddrs(object):
 
-    def __init__(self, workspace):
-        self.workspace = workspace
+    def __init__(self, workspace_name, organization):
+        self.workspace = Workspace(workspace_name, organization)
         self.mod_addrs = defaultdict(set)
         self.mod_addrs['embedded_modules'] = defaultdict(set)
-        with open(os.path.join(os.getcwd(), f"reports/statedb/{workspace}.json")) as workspace_data:
-            self._data = json.loads(workspace_data.read())
+        self._data = self.workspace.get_state()
         
         for x in self._data.get('resources'):
             if not x.get('tf_address').startswith('module'):
@@ -29,7 +30,7 @@ class WorkspaceAddrs(object):
                 self.mod_addrs['embedded_modules'][top_level_mod].add(sub_level_mod)
 
         self.mod_addrs['repo'] = self._data.get('repo')
-        self.mod_addrs['resources'] = self.resources # list(self.mod_addrs['resources'])
+        self.mod_addrs['resources'] = self.resources
         self.mod_addrs['top_level_modules'] = list(self.mod_addrs['top_level_modules'])
         for top_level_mod in self.mod_addrs['embedded_modules']:
             self.mod_addrs['embedded_modules'][top_level_mod] = list(self.mod_addrs['embedded_modules'][top_level_mod])
@@ -68,7 +69,7 @@ class WorkspaceAddrs(object):
     def embedded_modules(self):
         return self.mod_addrs.get('embedded_modules')
 
-def cmp_projects(db, cmp_projects):
+def cmp_projects(db, cmp_projects, organization):
     workspace_data = dict()
     workspaces = set()
     cmp_projects_inverse = dict()
@@ -87,16 +88,16 @@ def cmp_projects(db, cmp_projects):
         workspace_name = workspace[1]
         if project_type not in workspace_data:
             workspace_data[project_type] = dict()
-        workspace_data[project_type][f"{workspace_name}"] = WorkspaceAddrs(workspace_name).data
+        workspace_data[project_type][f"{workspace_name}"] = WorkspaceAddrs(workspace_name, organization).data
     return workspace_data, [workspace[0] for workspace in workspaces]
 
-def main(output, project_type):
+def main(output, project_type, organization):
     db = firestore.Client(project='example-infra-db')
     output = sanitize_path(output)
     if not os.path.isdir(output):
         os.makedirs(output)
     
-    workspace_data, workspaces = cmp_projects(db, project_types.get(project_type))
+    workspace_data, workspaces = cmp_projects(db, project_types.get(project_type), organization)
     with open(os.path.join(output, f"{project_type}-workspaces.json"), "w") as outputfile:
         outputfile.write(
             json.dumps(
@@ -116,21 +117,12 @@ def main(output, project_type):
                 sort_keys=True
             )
         )
-    # prod_workspace_data = cmp_projects(db, prod_projects)
-    # project_types = defaultdict(dict)
-    # # we're getting the workspace type and project name for each type of project in nastaging.
-    # for k, v in nastaging_projects.items():
-    #     # now we're gonna loop over every workspace that is in that gcp project. 
-    #     # we're going to just build a flat list of resources.
-    #     # we'll use the flat list to compare against the same in prod.
-    #     for workspace in nastaging_workspace_data.get(v).values():
-    #         project_types
-
 
 if __name__ == '__main__':
     from optparse import OptionParser
     parser = OptionParser()
     parser.add_option("--output", default=os.path.join(os.getcwd(), "reports/environments"))
     parser.add_option("--project")
+    parser.add_option("--organization", default="example-org")
     opt, args = parser.parse_args()
-    main(opt.output, opt.project)
+    main(opt.output, opt.project, opt.organization)
