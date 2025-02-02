@@ -15,19 +15,12 @@ from collections import defaultdict
 from github.GithubException import UnknownObjectException
 from functools import partial
 import re
-from helpers import tfe_token
+from tfe_tools.common import sanitize_path, tfe_token, get_requests_session, mod_dependencies
 
 class GitException(Exception):
     def __init__(self, msg):
         self.msg = msg
         super().__init__(msg)
-
-def sanitize_path(config):
-    path = os.path.expanduser(config)
-    path = os.path.expandvars(path)
-    path = os.path.abspath(path)
-    return path
-
 
 def modlist(rm, mods, list_url):
     rm_list = rm.list(list_url)

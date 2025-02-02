@@ -2,7 +2,7 @@
 from collections import defaultdict
 import os
 import json
-from helpers import sanitize_path
+from tfe_tools.common import sanitize_path
 from projects import project_types
 import sys
 

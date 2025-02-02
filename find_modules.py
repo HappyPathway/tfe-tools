@@ -15,7 +15,7 @@ from collections import defaultdict
 from github.GithubException import UnknownObjectException
 from functools import partial
 import re
-from helpers import tfe_token, mod_dependencies
+from tfe_tools.common import tfe_token, mod_dependencies
 import sys
 
 class GitException(Exception):

@@ -4,6 +4,59 @@ import os
 from collections import defaultdict
 import copy
 import sys
+import hcl2
+from glob import glob
+from requests import Session
+
+def sanitize_path(config):
+    path = os.path.expanduser(config)
+    path = os.path.expandvars(path)
+    path = os.path.abspath(path)
+    return path
+
+def tfe_token(tfe_api, config):
+    if os.environ.get("TFE_TOKEN"):
+        return os.environ.get("TFE_TOKEN")
+    elif os.path.isfile(sanitize_path(config)):
+        with open(sanitize_path(config), 'r') as fp:
+            obj = hcl2.load(fp)
+        return obj.get('credentials')[0].get(tfe_api).get('token')
+    elif sanitize_path("${HOME}/.terraform.d/credentials.tfrc.json"):
+        with open(sanitize_path("${HOME}/.terraform.d/credentials.tfrc.json"), 'r') as fp:
+            d = json.loads(fp.read())
+            return d.get('credentials').get(tfe_api).get('token')
+    else:
+        raise TFEException("Could not find credentials file")
+
+def get_requests_session(terraform_url="terraform.corp.clover.com"):
+    tkn = tfe_token(terraform_url, 
+        os.path.join(
+            os.environ.get("HOME"), 
+            ".terraformrc"
+        )
+    )
+    tfe_session = Session()
+    tfe_session.headers = {
+        "Authorization": "Bearer {0}".format(tkn), 
+        "Content-Type": "application/vnd.api+json"
+    }
+    return tfe_session
+
+def mod_dependencies(mod_name, config=False):
+    dependencies = dict()
+    for tf_file_name in glob("*.tf"):
+        with open(tf_file_name, 'r') as tf_file:
+            d = hcl2.loads(tf_file.read())
+            if not d.get('module'):
+                continue
+            for module in d.get('module'):
+                module_key = list(module.keys())[0]
+                if not config:
+                    module_source = module.get(module_key).get('source')
+                    dependencies[module_key] = module_source
+                else:
+                    dependencies[module_key] = module.get(module_key)
+    return dependencies
 
 def find_mod_source(source):
     script = "find_all_mods.py"

@@ -12,19 +12,14 @@ from github.GithubException import UnknownObjectException as gheUnknownObjectExc
 from tfe.core.organization import Organization
 from tfe.core import session
 import re
-from helpers import tfe_token
+from tfe_tools.common import sanitize_path, tfe_token, get_requests_session, mod_dependencies
+
 class GitException(Exception):
     def __init__(self, msg):
         self.msg = msg
         super().__init__(msg)
 
 
-def sanitize_path(config):
-    path = os.path.expanduser(config)
-    path = os.path.expandvars(path)
-    path = os.path.abspath(path)
-    return path
- 
 def clone(repo_clone_url):
     p = subprocess.Popen(
         "git clone {0}".format(repo_clone_url),
@@ -114,4 +109,3 @@ if __name__ == "__main__":
     p.add_option("-b", dest='base_dir',      default=mkdtemp(prefix="/tmp/"))
     opt, arg = p.parse_args()
     main(opt.terraform_url, opt.terraform_org, opt.github_base, opt.base_dir, opt.git_namespace)
-    

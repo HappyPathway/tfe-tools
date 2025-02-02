@@ -4,7 +4,7 @@ from collections import defaultdict
 import os
 import sys
 
-from tfe_tools.common import get_latest_versions
+from tfe_tools.common import get_latest_versions, sanitize_path, tfe_token, get_requests_session, mod_dependencies
 
 def main(terraform_base, terraform_url):
     mod_version_main(terraform_base, terraform_url)

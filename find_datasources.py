@@ -16,7 +16,7 @@ from tfe.core import session
 from requests import Session
 from urllib.parse import urlencode, quote_plus
 from pathlib import Path
-import helpers
+from tfe_tools.common import sanitize_path, tfe_token, get_requests_session, mod_dependencies
 import re
 
 def get_self_links(state):
@@ -62,12 +62,6 @@ def find_all_addresses(state, data_source_type=None, attr=None):
                 resources.add(_attr)
     return resources
     
-def sanitize_path(config):
-    path = os.path.expanduser(config)
-    path = os.path.expandvars(path)
-    path = os.path.abspath(path)
-    return path
- 
 def pprint(j_obj, indention=4, sort_keys=True):
      print(
          json.dumps(
@@ -103,7 +97,7 @@ def scan_workspace(workspace, url, data_source_type, attr, tfe_session, terrafor
     
 
 def main(terraform_url, terraform_org, data_source_type, attr, workspace_name=False):
-    tkn = helpers.tfe_token(terraform_url, 
+    tkn = tfe_token(terraform_url, 
         os.path.join(
             os.environ.get("HOME"), 
             ".terraformrc"

@@ -9,18 +9,12 @@ from collections import defaultdict
 from tempfile import NamedTemporaryFile
 import re
 import sys
-from tfe_tools.common import find_interesting_records, query_match, get_current_tf_version, clone, tf_version, tf_init
+from tfe_tools.common import find_interesting_records, query_match, get_current_tf_version, clone, tf_version, tf_init, sanitize_path
 
 class GitException(Exception):
     def __init__(self, msg):
         self.msg = msg
         super().__init__(msg)
-
-def sanitize_path(config):
-    path = os.path.expanduser(config)
-    path = os.path.expandvars(path)
-    path = os.path.abspath(path)
-    return path
 
 def main(value, github_base, basedir, workspaces=None, key=None, resource_type=None, current_tf_version=None, show_id=None):
     g = Github(

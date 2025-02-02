@@ -3,7 +3,7 @@ import json
 from dbsearch import find_interesting_records, query_match
 from updatedb import get_state, find_all_addresses
 from collections import defaultdict
-from helpers import get_requests_session, get_attr, filter_type
+from tfe_tools.common import get_requests_session, get_attr, filter_type
 import os
 
 def main(terraform_org, terraform_url, resource_type, attrs, base_dir="./reports/statedb/*.json"):

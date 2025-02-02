@@ -13,7 +13,8 @@ from tfe.core.organization import Organization
 from tfe.core.workspace import Workspace
 from tfe.core import session
 import re
-from helpers import tfe_token, mod_dependencies
+from tfe_tools.common import tfe_token, mod_dependencies, sanitize_path, get_requests_session
+
 class GitException(Exception):
     def __init__(self, msg):
         self.msg = msg
@@ -26,15 +27,6 @@ class TFEException(Exception):
         super().__init__(msg)
 
 
-def sanitize_path(config):
-    path = os.path.expanduser(config)
-    path = os.path.expandvars(path)
-    path = os.path.abspath(path)
-    if os.path.isfile(path):
-        return path
-    else:
-        return None
- 
 def clone(repo_clone_url):
     p = subprocess.Popen(
         "git clone {0}".format(repo_clone_url),
@@ -109,4 +101,3 @@ if __name__ == "__main__":
     p.add_option("-w", dest="workspace")
     opt, arg = p.parse_args()
     main(opt.terraform_url, opt.terraform_org, opt.github_base, opt.base_dir, opt.git_namespace, opt.workspace)
-    

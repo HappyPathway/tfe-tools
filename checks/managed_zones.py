@@ -4,7 +4,7 @@ import sys
 import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), os.path.pardir))
-from tfe_tools.common import find_interesting_records
+from tfe_tools.common import find_interesting_records, sanitize_path, tfe_token, get_requests_session, mod_dependencies
 
 reports_default_dir = os.path.join(
     os.path.join(
