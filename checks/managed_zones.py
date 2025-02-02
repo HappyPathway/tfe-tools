@@ -4,7 +4,7 @@ import sys
 import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), os.path.pardir))
-from find_rsc_attrs_in_workspaces import main as find_rsc_attrs_in_workspaces
+from tfe_tools.common import find_interesting_records
 
 reports_default_dir = os.path.join(
     os.path.join(
@@ -25,7 +25,7 @@ default_output = os.path.join(
 
 def main(base_dir, output):
     zones = list()
-    data = find_rsc_attrs_in_workspaces(
+    data = find_interesting_records(
         "clover", 
         "terraform.corp.clover.com", 
         "google_dns_managed_zone", 
