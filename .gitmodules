@@ -1,0 +1,3 @@
+[submodule "nit-pytfe-core"]
+	path = nit-pytfe-core
+	url = git@github.corp.clover.com:clover/nit-pytfe-core.git

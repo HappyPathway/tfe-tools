@@ -1,0 +1,12 @@
+# gcr.io/clover-container-registries/ghe-runners/pytfe-core
+name: "List Imagea"
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: list images
+        run: |
+          docker images -a

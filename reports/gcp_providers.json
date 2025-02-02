@@ -1,0 +1,269 @@
+{
+    "admin-plane":{
+        "google":"3.77",
+        "google-beta":"3.77"
+    },
+    "artifactory-corp":{
+        "google":"~> 2.5",
+        "google-beta":"~> 2.5"
+    },
+    "billing-sandbox-terraform":{
+        "google":"~> 3.12",
+        "google-beta":"~> 3.12"
+    },
+    "clover-ce-prod-database":{
+        "google":"~> 3.90",
+        "google-beta":"~> 3.90"
+    },
+    "clover-org":{
+        "google":"~> 3.16",
+        "google-beta":"~> 3.16"
+    },
+    "clover-preprod-in-app":{
+        "google":"~> 3.47",
+        "google-beta":"~> 3.47"
+    },
+    "clover-preprod-in-databases":{
+        "google":"~> 3.47",
+        "google-beta":"~> 3.47"
+    },
+    "clover-preprod-in-springboot":{
+        "google":"~> 3.47",
+        "google-beta":"~> 3.47"
+    },
+    "clover-prod-in-app":{
+        "google":"~> 3.47",
+        "google-beta":"~> 3.47"
+    },
+    "clover-prod-in-databases":{
+        "google":"~> 3.47",
+        "google-beta":"~> 3.47"
+    },
+    "clover-prod-in-springboot":{
+        "google":"~> 3.47",
+        "google-beta":"~> 3.47"
+    },
+    "container-registries-manager":{
+        "google":"~> 3.12",
+        "google-beta":"~> 3.12"
+    },
+    "corp-managed":{
+        "google":"~> 3.45.0",
+        "google-beta":"~> 3.44.0"
+    },
+    "corp-office-vpn":{
+        "google":"~> 3.86",
+        "google-beta":"~> 3.86"
+    },
+    "corp-unmanaged":{
+        "google":"~> 3.45.0",
+        "google-beta":"~> 3.44.0"
+    },
+    "corp-vpn":{
+        "google":"~> 3.16.0",
+        "google-beta":"~> 3.3"
+    },
+    "dba-test":{
+        "google":"~> 3.53.0",
+        "google-beta":"~> 3.44.0"
+    },
+    "delivery-infra-upgrade-tester":{
+        "google":"~> 3.81",
+        "google-beta":"~> 3.81"
+    },
+    "demo2":{
+        "google":"~> 3.53.0",
+        "google-beta":"~> 3.44.0"
+    },
+    "dev-container-registry-manager":{
+        "google":"~> 4.6",
+        "google-beta":"~> 4.6"
+    },
+    "dev-managed":{
+        "google":"~> 3.53.0",
+        "google-beta":"~> 3.71.0"
+    },
+    "dev1":{
+        "google":"~> 3.0",
+        "google-beta":"~> 3.0"
+    },
+    "dev2":{
+        "google":"~> 3.53.0",
+        "google-beta":"~> 3.44.0"
+    },
+    "dev25":{
+        "google":"~> 3.53.0",
+        "google-beta":"~> 3.44.0"
+    },
+    "dev26":{
+        "google":"~> 3.53.0",
+        "google-beta":"~> 3.44.0"
+    },
+    "dev3":{
+        "google":"~> 3.53.0",
+        "google-beta":"~> 3.44.0"
+    },
+    "dev5":{
+        "google":"~> 3.0",
+        "google-beta":"~> 3.0"
+    },
+    "dev6":{
+        "google":"~> 3.53.0",
+        "google-beta":"~> 3.44.0"
+    },
+    "dev7":{
+        "google":"~> 3.53.0",
+        "google-beta":"~> 3.44.0"
+    },
+    "ebb-sandbox":{
+        "google":"~> 3.12",
+        "google-beta":"~> 3.12"
+    },
+    "euprod":{
+        "google":"3.77",
+        "google-beta":"3.77"
+    },
+    "euprod-zonal":{
+        "google":"~> 3.7",
+        "google-beta":"~> 3.7"
+    },
+    "feedback-db-dev":{
+        "google":"~> 3.12",
+        "google-beta":"~> 3.12"
+    },
+    "flexlm-corp":{
+        "google":"~> 3.19",
+        "google-beta":"~> 3.19"
+    },
+    "gcp-iam":{
+        "google":"~> 3.53.0",
+        "google-beta":"~> 3.44.0"
+    },
+    "github-enterprise-corp-unmanaged":{
+        "google":"~> 3.45.0",
+        "google-beta":"~> 3.44.0"
+    },
+    "images":{
+        "google":"3.77"
+    },
+    "jenkins":{
+        "google":"~> 4.20",
+        "google-beta":"~> 4.20"
+    },
+    "jenkins-master-corp":{
+        "google":"~> 4.20",
+        "google-beta":"~> 4.20"
+    },
+    "jenkins-server-agents":{
+        "google":"~> 2.5",
+        "google-beta":"~> 2.5"
+    },
+    "jenkins-test":{
+        "google":"~> 4.20",
+        "google-beta":"~> 4.20"
+    },
+    "key-mgmt-plane":{
+        "google":"~> 3.47",
+        "google-beta":"~> 3.47"
+    },
+    "laprod":{
+        "google":"~> 3.7",
+        "google-beta":"~> 3.7"
+    },
+    "metaresources":{
+        "google":"~> 3.16.0",
+        "google-beta":"~> 3.16.0"
+    },
+    "metaresources-in":{
+        "google":"~> 3.16.0",
+        "google-beta":"~> 3.16.0"
+    },
+    "pciprod":{
+        "google":"3.77",
+        "google-beta":"3.77"
+    },
+    "phabricator-corp":{
+        "google":"3.77",
+        "google-beta":"3.77"
+    },
+    "prod-apps":{
+        "google":"~> 3.53.0",
+        "google-beta":"~> 3.13.0"
+    },
+    "prod-databases":{
+        "google":"~> 3.7",
+        "google-beta":"~> 3.7"
+    },
+    "project-manager":{
+        "google":"~> 3.12",
+        "google-beta":"~> 3.12"
+    },
+    "project-manager-non-prod":{
+        "google":"~> 3.12",
+        "google-beta":"~> 3.12"
+    },
+    "project-manager-sandbox":{
+        "google":"~> 3.12",
+        "google-beta":"~> 3.12"
+    },
+    "rapidconnect-corp":{
+        "google":"~> 3.19",
+        "google-beta":"~> 3.19"
+    },
+    "rombuild-jenkins-agents-corp":{
+        "google":"~> 2.5",
+        "google-beta":"~> 2.5"
+    },
+    "rombuild-jenkins-master":{
+        "google":"~> 2.5",
+        "google-beta":"~> 2.5"
+    },
+    "sandboxdev":{
+        "google":"~> 3.53.0",
+        "google-beta":"~> 3.53"
+    },
+    "sandboxprod":{
+        "google":"~> 3.7",
+        "google-beta":"~> 3.7"
+    },
+    "spring-boot-apps-dev":{
+        "google":"~> 3.47",
+        "google-beta":"~> 3.47"
+    },
+    "spring-boot-apps-euprod":{
+        "google":"~> 3.47",
+        "google-beta":"~> 3.47"
+    },
+    "spring-boot-apps-laprod":{
+        "google":"~> 3.47",
+        "google-beta":"~> 3.47"
+    },
+    "spring-boot-apps-usprod":{
+        "google":"~> 3.47",
+        "google-beta":"~> 3.47"
+    },
+    "stg1":{
+        "google":"~> 3.7",
+        "google-beta":"~> 3.7"
+    },
+    "stg2":{
+        "google":"~> 3.7",
+        "google-beta":"~> 3.7"
+    },
+    "stg3":{
+        "google":"~> 3.7",
+        "google-beta":"~> 3.7"
+    },
+    "stg4":{
+        "google":"~> 3.7",
+        "google-beta":"~> 3.7"
+    },
+    "usprod":{
+        "google":"3.77",
+        "google-beta":"3.77"
+    },
+    "usprod-dsm":{
+        "google":"3.77",
+        "google-beta":"3.77"
+    }
+}

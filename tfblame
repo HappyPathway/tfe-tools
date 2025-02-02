@@ -1,0 +1,176 @@
+#!/usr/bin/env python3
+import requests
+from requests import Session
+import hcl
+import os
+import sys
+import json
+import helpers
+import re 
+from collections import defaultdict
+def pprint(data):
+    print(json.dumps(
+            data,
+            separators=(',', ':'),
+            indent=4,
+            sort_keys=True
+        ))
+    
+def list_workspaces(session, api, org):
+    url = "https://{0}/api/v2/organizations/{1}/workspaces".format(api, org)
+    resp = session.get(url)
+    for x in resp.json().get('data'):
+        yield x
+
+def list_runs(session, api, ws):
+    url = "https://{0}/api/v2/workspaces/{1}/runs".format(api, ws)
+    resp = session.get(url)
+    for x in resp.json().get('data'):
+        yield x
+
+def list_states(session, api, ws_name, org):
+    url =  "https://{0}/api/v2/state-versions?filter%5Bworkspace%5D%5Bname%5D={1}&filter%5Borganization%5D%5Bname%5D={2}".format(api, ws_name, org)
+    resp = session.get(url)
+    return resp.json()
+
+def get_state_version(session, api, state_id):
+    url = "https://{0}/api/v2/state-versions/{1}".format(api, state_id)
+    resp = session.get(url)
+    return resp.json()
+    
+def get_cost_estimate(session, api, c_id):
+    url = "https://{0}/api/v2/cost-estimates/{1}".format(api, c_id)
+    resp = session.get(url)
+    return resp.json().get("data")
+
+def get_plan(session, api, plan_id):
+    url = "https://{0}/api/v2/plans/{1}".format(api, plan_id)
+    resp = session.get(url)
+    try:
+        json_output = resp.json().get("data").get("links").get("json-output")
+        url = os.path.join("https://{0}/{1}".format(api, json_output))
+        resp = session.get(url)
+        return url, resp.json()
+    except:
+        return url, dict()
+
+def sanitize_path(path):
+    path = os.path.abspath(path)
+    path = os.path.expanduser(path)
+    path = os.path.expandvars(path)
+    return path
+
+def get_user(session, api, user_id):
+    # https://app.terraform.io/api/v2/users/user-MA4GL63FmYRpSFxa
+    url = f"https://{api}/api/v2/users/{user_id}"
+    resp = session.get(url)
+    json_output = resp.json()
+    return json_output.get('data').get('attributes').get('username')
+    
+
+
+def init(api):
+    token = helpers.tfe_token(api, 
+        os.path.join(
+            os.environ.get("HOME"), 
+            ".terraformrc"
+        )
+    )
+    # with open("{0}/.terraformrc".format(os.environ.get("HOME"))) as tfc:
+    #     tfc = hcl.loads(tfc.read())
+    # token = tfc.get("credentials").get(api).get("token")
+    session = Session()
+    session_headers = {
+        "Authorization": "Bearer {0}".format(token),
+        "Content-Type": "application/vnd.api+json"
+    }
+    session.headers = session_headers
+    return session
+
+def main(opt):
+    os.chdir(os.getcwd())
+    session = init(opt.api)
+    resource_regex = re.compile(opt.query)
+    ws_id = None
+    for ws in list_workspaces(session, opt.api, opt.org):
+        if ws.get("attributes").get("name") == opt.workspace:
+            ws_id = ws.get("id")
+
+    print(ws_id)
+    change_dict = defaultdict(list)
+    for run in list_runs(session, opt.api, ws_id):
+        run_id = run.get("id")
+        run_url = f"https://{opt.api}/app/{opt.org}/workspaces/{opt.workspace}/runs/{run_id}"
+        print(f"Scanning {run_url}")
+        if opt.run and run_id != opt.run:
+            continue
+        
+        plan = run.get("relationships").get("plan")
+        url, plan = get_plan(session, opt.api, plan.get("data").get("id"))
+        if not plan.get("resource_changes"):
+            continue
+        
+        # print(plan.keys())
+        # pprint(plan.get('configuration'))
+        # pprint(plan.get('relevant_attributes'))
+        try:
+            created_by = get_user(
+                session,
+                opt.api,
+                run.get('relationships').get('created-by').get('data').get('id')
+            )
+        except:
+            created_by = "unknown"
+        try:
+            confirmed_by = get_user(
+                session,
+                opt.api,
+                run.get('relationships').get('confirmed-by').get('data').get('id')
+            )
+        except:
+            confirmed_by = "unknown"
+        
+        
+        changes = list()
+        for change in plan.get('resource_changes'): 
+            if resource_regex.search(json.dumps(change)):
+                if opt.change_type and opt.change_type not in change.get('change').get('actions'):
+                    continue
+                
+                data = dict()
+                addr = change.get('address')
+                if addr:
+                        data['addr'] = addr
+                reason = change.get('action_reason')
+                if reason:
+                        data['reason'] = change.get('action_reason')
+                changes.append(
+                    dict(
+                        data=data
+                    )
+                )
+        if len(changes):
+            change_dict[run_url] = dict(
+                changes = changes,
+                created_by = created_by,
+                confirmed_by = confirmed_by
+            )
+
+    print(json.dumps(
+        change_dict,
+        separators=(',', ':'),
+        indent=4,
+        sort_keys=True
+    ))
+
+if __name__ == '__main__':
+    from optparse import OptionParser
+    p = OptionParser()
+    p.add_option("--api", dest="api", default="terraform.corp.clover.com")
+    p.add_option("--org", dest="org", default="clover")
+    p.add_option("-w", dest="workspace")
+    p.add_option("-r", dest="run")
+    p.add_option("-t", dest="change_type", default="delete")
+    p.add_option("--query")
+    opt, arg = p.parse_args()
+    main(opt)

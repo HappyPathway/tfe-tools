@@ -1,0 +1,25 @@
+{
+    "repo":"clover/corp-firestore",
+    "resources":[
+        {
+            "name":"app",
+            "resource_type":"google_app_engine_application",
+            "rsc_id":"clover-corp-firestore",
+            "tf_address":"google_app_engine_application.app"
+        },
+        {
+            "name":"firestore_mosaic",
+            "resource_type":"google_project_iam_member",
+            "rsc_id":"clover-corp-firestore/roles/datastore.indexAdmin/serviceAccount:web-mosaic@clover-admin-plane.iam.gserviceaccount.com",
+            "tf_address":"google_project_iam_member.firestore_mosaic[\"roles/datastore.indexAdmin\"]"
+        },
+        {
+            "name":"firestore_mosaic",
+            "resource_type":"google_project_iam_member",
+            "rsc_id":"clover-corp-firestore/roles/datastore.user/serviceAccount:web-mosaic@clover-admin-plane.iam.gserviceaccount.com",
+            "tf_address":"google_project_iam_member.firestore_mosaic[\"roles/datastore.user\"]"
+        }
+    ],
+    "terraform_version":"1.2.3",
+    "workspace":"corp-firestore"
+}

@@ -1,0 +1,817 @@
+{
+    "repo":"clover/grafana-alerts",
+    "resources":[
+        {
+            "name":"clover_alerts",
+            "resource_type":"mimir_alertmanager_config",
+            "rsc_id":"clovernetwork",
+            "tf_address":"mimir_alertmanager_config.clover_alerts"
+        },
+        {
+            "name":"AuditEventNAStg",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Audit events (DEV)/AuditEventNAStg",
+            "tf_address":"mimir_rule_group_alerting.AuditEventNAStg"
+        },
+        {
+            "name":"BoardingAsyncChecks",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Boarding (DEV)/BoardingAsyncChecks",
+            "tf_address":"mimir_rule_group_alerting.BoardingAsyncChecks"
+        },
+        {
+            "name":"BoardingEventChecks",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Boarding (DEV)/BoardingEventChecks",
+            "tf_address":"mimir_rule_group_alerting.BoardingEventChecks"
+        },
+        {
+            "name":"BoardingFunctionalChecks",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Boarding (DEV)/BoardingFunctionalChecks",
+            "tf_address":"mimir_rule_group_alerting.BoardingFunctionalChecks"
+        },
+        {
+            "name":"BoardingHealthChecks",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Boarding (DEV)/BoardingHealthChecks",
+            "tf_address":"mimir_rule_group_alerting.BoardingHealthChecks"
+        },
+        {
+            "name":"BoardingKafkaChecks",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Boarding (DEV)/BoardingKafkaChecks",
+            "tf_address":"mimir_rule_group_alerting.BoardingKafkaChecks"
+        },
+        {
+            "name":"BoardingLAFunctionalChecks",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Boarding (DEV)/BoardingLAFunctionalChecks",
+            "tf_address":"mimir_rule_group_alerting.BoardingLAFunctionalChecks"
+        },
+        {
+            "name":"BoardingLAKafkaChecks",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Boarding (DEV)/BoardingLAKafkaChecks",
+            "tf_address":"mimir_rule_group_alerting.BoardingLAKafkaChecks"
+        },
+        {
+            "name":"BoardingNAFunctionalChecks",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Boarding (DEV)/BoardingNAFunctionalChecks",
+            "tf_address":"mimir_rule_group_alerting.BoardingNAFunctionalChecks"
+        },
+        {
+            "name":"BoardingNAHealthChecks",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Boarding (DEV)/BoardingNAHealthChecks",
+            "tf_address":"mimir_rule_group_alerting.BoardingNAHealthChecks"
+        },
+        {
+            "name":"BoardingNAKafkaChecks",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Boarding (DEV)/BoardingNAKafkaChecks",
+            "tf_address":"mimir_rule_group_alerting.BoardingNAKafkaChecks"
+        },
+        {
+            "name":"BoardingPubsubChecks",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Boarding (DEV)/BoardingPubsubChecks",
+            "tf_address":"mimir_rule_group_alerting.BoardingPubsubChecks"
+        },
+        {
+            "name":"CloudSQL_dev",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DBA (DEV)/Cloudsql_dev",
+            "tf_address":"mimir_rule_group_alerting.CloudSQL_dev"
+        },
+        {
+            "name":"DataProtectionServiceAlerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Boarding (DEV)/DataProtectionServiceAlerts",
+            "tf_address":"mimir_rule_group_alerting.DataProtectionServiceAlerts"
+        },
+        {
+            "name":"DevOps_Jenkins_queue_count",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DevOps (DEV)/DevOps_JenkinsQueueCount",
+            "tf_address":"mimir_rule_group_alerting.DevOps_Jenkins_queue_count"
+        },
+        {
+            "name":"EMEABoardingDEVDeadLetter",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"EMEA Boarding (DEV)/EMEABoardingDEVDeadLetter",
+            "tf_address":"mimir_rule_group_alerting.EMEABoardingDEVDeadLetter"
+        },
+        {
+            "name":"EMEABoardingDEVFunctionalChecks",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Boarding (DEV)/EMEABoardingDEVFunctionalChecks",
+            "tf_address":"mimir_rule_group_alerting.EMEABoardingDEVFunctionalChecks"
+        },
+        {
+            "name":"EMEABoardingDEVMSCosErrors",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"EMEA Boarding (DEV)/EMEABoardingDEVMSCosErrors",
+            "tf_address":"mimir_rule_group_alerting.EMEABoardingDEVMSCosErrors"
+        },
+        {
+            "name":"EMEABoardingDEVMSProcessing",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"EMEA Boarding (DEV)/EMEABoardingDEVMSProcessing",
+            "tf_address":"mimir_rule_group_alerting.EMEABoardingDEVMSProcessing"
+        },
+        {
+            "name":"EMEABoardingDEVMSPubSub",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"EMEA Boarding (DEV)/EMEABoardingDEVMSPubSub",
+            "tf_address":"mimir_rule_group_alerting.EMEABoardingDEVMSPubSub"
+        },
+        {
+            "name":"EMEABoardingDEVMSResponses",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"EMEA Boarding (DEV)/EMEABoardingDEVMSResponses",
+            "tf_address":"mimir_rule_group_alerting.EMEABoardingDEVMSResponses"
+        },
+        {
+            "name":"EbbContainerHealthMonitoring",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"EBB (DEV)/EbbContainerHealthMonitoring",
+            "tf_address":"mimir_rule_group_alerting.EbbContainerHealthMonitoring"
+        },
+        {
+            "name":"EbbEventConsumerFailureCheck",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"EBB (DEV)/EbbEventConsumerFailureCheck",
+            "tf_address":"mimir_rule_group_alerting.EbbEventConsumerFailureCheck"
+        },
+        {
+            "name":"EbbEventDeserializationFailureCheck",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"EBB (DEV)/EbbEventDeserializationFailureCheck",
+            "tf_address":"mimir_rule_group_alerting.EbbEventDeserializationFailureCheck"
+        },
+        {
+            "name":"EbbEventingChecks",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"EBB (DEV)/EbbEventingChecks",
+            "tf_address":"mimir_rule_group_alerting.EbbEventingChecks"
+        },
+        {
+            "name":"EbbGooglePubSubMonitoring",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"EBB (DEV)/EbbGooglePubSubMonitoring",
+            "tf_address":"mimir_rule_group_alerting.EbbGooglePubSubMonitoring"
+        },
+        {
+            "name":"EmeaAccountStatusDEVBilling",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Boarding (DEV)/EmeaAccountStatusDEVBilling",
+            "tf_address":"mimir_rule_group_alerting.EmeaAccountStatusDEVBilling"
+        },
+        {
+            "name":"JKSCert_Dev",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"NIT (DEV)/JKSCert_Dev",
+            "tf_address":"mimir_rule_group_alerting.JKSCert_Dev"
+        },
+        {
+            "name":"MerchantChangeEventNAStg",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Merchant change event (DEV)/MerchantChangeEventNAStg",
+            "tf_address":"mimir_rule_group_alerting.MerchantChangeEventNAStg"
+        },
+        {
+            "name":"NABoardingServiceAlertsDev",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Boarding (DEV)/NABoardingServiceAlertsDev",
+            "tf_address":"mimir_rule_group_alerting.NABoardingServiceAlertsDev"
+        },
+        {
+            "name":"Pd_Alert_notification_test",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SRE (DEV)/PdAlertNotificationTest",
+            "tf_address":"mimir_rule_group_alerting.Pd_Alert_notification_test"
+        },
+        {
+            "name":"ProxySQL_dev",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DBA (DEV)/ProxySQL_dev",
+            "tf_address":"mimir_rule_group_alerting.ProxySQL_dev"
+        },
+        {
+            "name":"RapidConnect",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Payments (DEV)/RapidConnect",
+            "tf_address":"mimir_rule_group_alerting.RapidConnect"
+        },
+        {
+            "name":"global_certificate_change",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SRE (DEV)/GlobalCertificateChange",
+            "tf_address":"mimir_rule_group_alerting.global_certificate_change"
+        },
+        {
+            "name":"grafanaproxy",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SRE (DEV)/GrafanaProxy",
+            "tf_address":"mimir_rule_group_alerting.grafanaproxy"
+        },
+        {
+            "name":"haproxy_sandboxprod",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SRE (DEV)/HAProxySandboxProd",
+            "tf_address":"mimir_rule_group_alerting.haproxy_sandboxprod"
+        },
+        {
+            "name":"kafka_broker",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SRE (DEV)/KafkaBroker",
+            "tf_address":"mimir_rule_group_alerting.kafka_broker"
+        },
+        {
+            "name":"push_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CORE SERVICES (DEV)/PushAlerts",
+            "tf_address":"mimir_rule_group_alerting.push_alerts"
+        },
+        {
+            "name":"push_publisher_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CORE SERVICES (DEV)/PushPublisherAlerts",
+            "tf_address":"mimir_rule_group_alerting.push_publisher_alerts"
+        },
+        {
+            "name":"sockd",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"NIT (DEV)/SockD",
+            "tf_address":"mimir_rule_group_alerting.sockd"
+        },
+        {
+            "name":"squidproxy",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"NIT (DEV)/SquidProxy",
+            "tf_address":"mimir_rule_group_alerting.squidproxy"
+        },
+        {
+            "name":"striim_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DataPlatform (DEV)/StriimAlerts",
+            "tf_address":"mimir_rule_group_alerting.striim_alerts"
+        },
+        {
+            "name":"system",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SRE (DEV)/SystemAlerts",
+            "tf_address":"mimir_rule_group_alerting.system"
+        },
+        {
+            "name":"host_mlc_events",
+            "resource_type":"mimir_rule_group_recording",
+            "rsc_id":"Boarding (DEV)/HostMlcEventFailuresRules",
+            "tf_address":"mimir_rule_group_recording.host_mlc_events"
+        },
+        {
+            "name":"application_healthcheck_alert",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Billing (DEV)/ApplicationHttpHealthcheckAlert_BillingSupport_dev",
+            "tf_address":"module.alerts_application_check_billingsupport.mimir_rule_group_alerting.application_healthcheck_alert[\"BillingSupport_dev\"]"
+        },
+        {
+            "name":"application_healthcheck_alert",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DevOps (DEV)/ApplicationHttpHealthcheckAlert_DevOps_apps",
+            "tf_address":"module.alerts_application_check_devops.mimir_rule_group_alerting.application_healthcheck_alert[\"DevOps_apps\"]"
+        },
+        {
+            "name":"application_healthcheck_alert",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DevOps (DEV)/ApplicationHttpHealthcheckAlert_DevOps_tools",
+            "tf_address":"module.alerts_application_check_devops.mimir_rule_group_alerting.application_healthcheck_alert[\"DevOps_tools\"]"
+        },
+        {
+            "name":"application_healthcheck_alert",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SRE (DEV)/ApplicationHttpHealthcheckAlert_SRE_SandBoxProd",
+            "tf_address":"module.alerts_application_check_sre.mimir_rule_group_alerting.application_healthcheck_alert[\"SRE_SandBoxProd\"]"
+        },
+        {
+            "name":"alert_certificate_expiry_server_PEM",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SRE (DEV)/CertificateExpiryServerPem_SRE_dev",
+            "tf_address":"module.alerts_certificate_expire.mimir_rule_group_alerting.alert_certificate_expiry_server_PEM[\"SRE_dev\"]"
+        },
+        {
+            "name":"certificator_store",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SRE (DEV)/CertificatorStore_SRE_dev",
+            "tf_address":"module.alerts_certificator_store.mimir_rule_group_alerting.certificator_store[\"SRE_dev\"]"
+        },
+        {
+            "name":"CloudSQL_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Devices (DEV)/CloudSqlAlerts_Device_corp",
+            "tf_address":"module.alerts_cloudSQL_device.mimir_rule_group_alerting.CloudSQL_alerts[\"Device_corp\"]"
+        },
+        {
+            "name":"CloudSQL_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Growth (DEV)/CloudSqlAlerts_ColoSpringboot_dev",
+            "tf_address":"module.alerts_cloudSQL_growth.mimir_rule_group_alerting.CloudSQL_alerts[\"ColoSpringboot_dev\"]"
+        },
+        {
+            "name":"CloudSQL_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Growth (DEV)/CloudSqlAlerts_Growth_dev",
+            "tf_address":"module.alerts_cloudSQL_growth.mimir_rule_group_alerting.CloudSQL_alerts[\"Growth_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"COS (DEV)/ComputeNodeAlert_CPE_dev",
+            "tf_address":"module.alerts_compute_COS.mimir_rule_group_alerting.compute_node_alerts[\"CPE_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"COREEXPERIENCE (DEV)/ComputeNodeAlert_CPE_dev",
+            "tf_address":"module.alerts_compute_Push.mimir_rule_group_alerting.compute_node_alerts[\"CPE_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Billing (DEV)/ComputeNodeAlert_BillingSupport_dev",
+            "tf_address":"module.alerts_compute_billingsupport.mimir_rule_group_alerting.compute_node_alerts[\"BillingSupport_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CCI (DEV)/ComputeNodeAlert_CCI_dev",
+            "tf_address":"module.alerts_compute_cci.mimir_rule_group_alerting.compute_node_alerts[\"CCI_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CCI (DEV)/ComputeNodeAlert_CCI_springboot_dev",
+            "tf_address":"module.alerts_compute_cci.mimir_rule_group_alerting.compute_node_alerts[\"CCI_springboot_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/ComputeNodeAlert_CPE_dev",
+            "tf_address":"module.alerts_compute_cloudplatform.mimir_rule_group_alerting.compute_node_alerts[\"CPE_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CloverGo (DEV)/ComputeNodeAlert_CloverGoSpringboot_dev",
+            "tf_address":"module.alerts_compute_clovergo.mimir_rule_group_alerting.compute_node_alerts[\"CloverGoSpringboot_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Colo (DEV)/ComputeNodeAlert_ColoSpringboot_dev",
+            "tf_address":"module.alerts_compute_colo.mimir_rule_group_alerting.compute_node_alerts[\"ColoSpringboot_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"COREEXPERIENCE (DEV)/ComputeNodeAlert_CoreExperience_dev",
+            "tf_address":"module.alerts_compute_coreexperience.mimir_rule_group_alerting.compute_node_alerts[\"CoreExperience_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"COREEXPERIENCE (DEV)/ComputeNodeAlert_CoreExperience_springboot_dev",
+            "tf_address":"module.alerts_compute_coreexperience.mimir_rule_group_alerting.compute_node_alerts[\"CoreExperience_springboot_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SHARED (DEV)/ComputeNodeAlert_COSSERVER_dev",
+            "tf_address":"module.alerts_compute_cosserver.mimir_rule_group_alerting.compute_node_alerts[\"COSSERVER_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DBA (DEV)/ComputeNodeAlert_DBA_dev",
+            "tf_address":"module.alerts_compute_database.mimir_rule_group_alerting.compute_node_alerts[\"DBA_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DataEngineering (DEV)/ComputeNodeAlert_DE_KafkaConnect_dev",
+            "tf_address":"module.alerts_compute_dataengineering.mimir_rule_group_alerting.compute_node_alerts[\"DE_KafkaConnect_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DataReporting (DEV)/ComputeNodeAlert_DR_dev",
+            "tf_address":"module.alerts_compute_datareporting.mimir_rule_group_alerting.compute_node_alerts[\"DR_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SRE (DEV)/ComputeNodeAlert_SRE_Sandboxprod",
+            "tf_address":"module.alerts_compute_dev.mimir_rule_group_alerting.compute_node_alerts[\"SRE_Sandboxprod\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SRE (DEV)/ComputeNodeAlert_SRE_dev",
+            "tf_address":"module.alerts_compute_dev.mimir_rule_group_alerting.compute_node_alerts[\"SRE_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SRE (DEV)/ComputeNodeAlert_SRE_dev1_corp",
+            "tf_address":"module.alerts_compute_dev.mimir_rule_group_alerting.compute_node_alerts[\"SRE_dev1_corp\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Devices (DEV)/ComputeNodeAlert_Devices_dev",
+            "tf_address":"module.alerts_compute_devices.mimir_rule_group_alerting.compute_node_alerts[\"Devices_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Devices (DEV)/ComputeNodeAlert_Devices_springboot_dev",
+            "tf_address":"module.alerts_compute_devices.mimir_rule_group_alerting.compute_node_alerts[\"Devices_springboot_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DevOps (DEV)/ComputeNodeAlert_DevOps_group1",
+            "tf_address":"module.alerts_compute_devops.mimir_rule_group_alerting.compute_node_alerts[\"DevOps_group1\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DevOps (DEV)/ComputeNodeAlert_DevOps_group2",
+            "tf_address":"module.alerts_compute_devops.mimir_rule_group_alerting.compute_node_alerts[\"DevOps_group2\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DevOps (DEV)/ComputeNodeAlert_DevOps_group3",
+            "tf_address":"module.alerts_compute_devops.mimir_rule_group_alerting.compute_node_alerts[\"DevOps_group3\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DevOps (DEV)/ComputeNodeAlert_DevOps_group4",
+            "tf_address":"module.alerts_compute_devops.mimir_rule_group_alerting.compute_node_alerts[\"DevOps_group4\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DevOps (DEV)/ComputeNodeAlert_DevOps_group5",
+            "tf_address":"module.alerts_compute_devops.mimir_rule_group_alerting.compute_node_alerts[\"DevOps_group5\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DevOps (DEV)/ComputeNodeAlert_DevOps_group6",
+            "tf_address":"module.alerts_compute_devops.mimir_rule_group_alerting.compute_node_alerts[\"DevOps_group6\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DevOps (DEV)/ComputeNodeAlert_DevOps_group7",
+            "tf_address":"module.alerts_compute_devops.mimir_rule_group_alerting.compute_node_alerts[\"DevOps_group7\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DevOps (DEV)/ComputeNodeAlert_DevOps_group8",
+            "tf_address":"module.alerts_compute_devops.mimir_rule_group_alerting.compute_node_alerts[\"DevOps_group8\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Finvas (DEV)/ComputeNodeAlert_Finvas_springboot_dev",
+            "tf_address":"module.alerts_compute_finvas.mimir_rule_group_alerting.compute_node_alerts[\"Finvas_springboot_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Growth (DEV)/ComputeNodeAlert_Growth_dev",
+            "tf_address":"module.alerts_compute_growth.mimir_rule_group_alerting.compute_node_alerts[\"Growth_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Growth (DEV)/ComputeNodeAlert_Growth_springboot_dev",
+            "tf_address":"module.alerts_compute_growth.mimir_rule_group_alerting.compute_node_alerts[\"Growth_springboot_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"MerchantLifecycle (DEV)/ComputeNodeAlert_merchantlifecycle_springboot_dev",
+            "tf_address":"module.alerts_compute_merchantlifecycle.mimir_rule_group_alerting.compute_node_alerts[\"merchantlifecycle_springboot_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"NIT (DEV)/ComputeNodeAlert_NIT_dev",
+            "tf_address":"module.alerts_compute_nit.mimir_rule_group_alerting.compute_node_alerts[\"NIT_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Payments (DEV)/ComputeNodeAlert_Payments_dev",
+            "tf_address":"module.alerts_compute_payments.mimir_rule_group_alerting.compute_node_alerts[\"Payments_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Payments (DEV)/ComputeNodeAlert_Payments_springboot_dev",
+            "tf_address":"module.alerts_compute_payments.mimir_rule_group_alerting.compute_node_alerts[\"Payments_springboot_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"POS (DEV)/ComputeNodeAlert_POS_springboot_dev",
+            "tf_address":"module.alerts_compute_pos.mimir_rule_group_alerting.compute_node_alerts[\"POS_springboot_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Security (DEV)/ComputeNodeAlert_Security_corp",
+            "tf_address":"module.alerts_compute_security.mimir_rule_group_alerting.compute_node_alerts[\"Security_corp\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SEMI (DEV)/ComputeNodeAlert_SEMI_dev",
+            "tf_address":"module.alerts_compute_semi.mimir_rule_group_alerting.compute_node_alerts[\"SEMI_dev\"]"
+        },
+        {
+            "name":"compute_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SEMI (DEV)/ComputeNodeAlert_SEMI_springboot_dev",
+            "tf_address":"module.alerts_compute_semi.mimir_rule_group_alerting.compute_node_alerts[\"SEMI_springboot_dev\"]"
+        },
+        {
+            "name":"cos_node_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"COS (DEV)/CosAlert_COSSERVER_dev",
+            "tf_address":"module.alerts_cos.mimir_rule_group_alerting.cos_node_alerts[\"COSSERVER_dev\"]"
+        },
+        {
+            "name":"serverkit_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"COS (DEV)/ServerKitAlert_COSSERVER_dev",
+            "tf_address":"module.alerts_cos_serverkit.mimir_rule_group_alerting.serverkit_alerts[\"COSSERVER_dev\"]"
+        },
+        {
+            "name":"ghe_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DevOps (DEV)/GithubEnterpriseAlerts_DevOps",
+            "tf_address":"module.alerts_ghe_devops.mimir_rule_group_alerting.ghe_alerts[\"DevOps\"]"
+        },
+        {
+            "name":"Kafka_Connect_Rest_Service",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DataEngineering (DEV)/KafkaConnectAlert_DE_kafkaconnect_jmx_dev",
+            "tf_address":"module.alerts_kafka_connect.mimir_rule_group_alerting.Kafka_Connect_Rest_Service[\"DE_kafkaconnect_jmx_dev\"]"
+        },
+        {
+            "name":"Kafka_Connect_Rest_Service",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DataEngineering (DEV)/KafkaConnectAlert_DE_kafkaconnect_rest_dev",
+            "tf_address":"module.alerts_kafka_connect.mimir_rule_group_alerting.Kafka_Connect_Rest_Service[\"DE_kafkaconnect_rest_dev\"]"
+        },
+        {
+            "name":"kubernetes_container_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/ContainerAlert_dev_cluster",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_container_alerts[\"dev_cluster\"]"
+        },
+        {
+            "name":"kubernetes_container_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/ContainerAlert_pci_cluster_1",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_container_alerts[\"pci_cluster_1\"]"
+        },
+        {
+            "name":"kubernetes_container_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/ContainerAlert_pci_cluster_2",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_container_alerts[\"pci_cluster_2\"]"
+        },
+        {
+            "name":"kubernetes_container_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/ContainerAlert_pci_cluster_legacy",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_container_alerts[\"pci_cluster_legacy\"]"
+        },
+        {
+            "name":"kubernetes_container_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/ContainerAlert_staging_cluster_1",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_container_alerts[\"staging_cluster_1\"]"
+        },
+        {
+            "name":"kubernetes_container_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/ContainerAlert_staging_cluster_2",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_container_alerts[\"staging_cluster_2\"]"
+        },
+        {
+            "name":"kubernetes_daemonset_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/DaemonsetAlert_dev_cluster",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_daemonset_alerts[\"dev_cluster\"]"
+        },
+        {
+            "name":"kubernetes_daemonset_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/DaemonsetAlert_pci_cluster_1",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_daemonset_alerts[\"pci_cluster_1\"]"
+        },
+        {
+            "name":"kubernetes_daemonset_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/DaemonsetAlert_pci_cluster_2",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_daemonset_alerts[\"pci_cluster_2\"]"
+        },
+        {
+            "name":"kubernetes_daemonset_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/DaemonsetAlert_pci_cluster_legacy",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_daemonset_alerts[\"pci_cluster_legacy\"]"
+        },
+        {
+            "name":"kubernetes_daemonset_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/DaemonsetAlert_staging_cluster_1",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_daemonset_alerts[\"staging_cluster_1\"]"
+        },
+        {
+            "name":"kubernetes_daemonset_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/DaemonsetAlert_staging_cluster_2",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_daemonset_alerts[\"staging_cluster_2\"]"
+        },
+        {
+            "name":"kubernetes_deployment_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/DeploymentAlert_dev_cluster",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_deployment_alerts[\"dev_cluster\"]"
+        },
+        {
+            "name":"kubernetes_deployment_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/DeploymentAlert_pci_cluster_1",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_deployment_alerts[\"pci_cluster_1\"]"
+        },
+        {
+            "name":"kubernetes_deployment_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/DeploymentAlert_pci_cluster_2",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_deployment_alerts[\"pci_cluster_2\"]"
+        },
+        {
+            "name":"kubernetes_deployment_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/DeploymentAlert_pci_cluster_legacy",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_deployment_alerts[\"pci_cluster_legacy\"]"
+        },
+        {
+            "name":"kubernetes_deployment_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/DeploymentAlert_staging_cluster_1",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_deployment_alerts[\"staging_cluster_1\"]"
+        },
+        {
+            "name":"kubernetes_deployment_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/DeploymentAlert_staging_cluster_2",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_deployment_alerts[\"staging_cluster_2\"]"
+        },
+        {
+            "name":"kubernetes_job_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/JobAlert_dev_cluster",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_job_alerts[\"dev_cluster\"]"
+        },
+        {
+            "name":"kubernetes_job_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/JobAlert_pci_cluster_1",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_job_alerts[\"pci_cluster_1\"]"
+        },
+        {
+            "name":"kubernetes_job_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/JobAlert_pci_cluster_2",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_job_alerts[\"pci_cluster_2\"]"
+        },
+        {
+            "name":"kubernetes_job_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/JobAlert_pci_cluster_legacy",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_job_alerts[\"pci_cluster_legacy\"]"
+        },
+        {
+            "name":"kubernetes_job_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/JobAlert_staging_cluster_1",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_job_alerts[\"staging_cluster_1\"]"
+        },
+        {
+            "name":"kubernetes_job_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/JobAlert_staging_cluster_2",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_job_alerts[\"staging_cluster_2\"]"
+        },
+        {
+            "name":"kubernetes_pod_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/PodAlert_dev_cluster",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_pod_alerts[\"dev_cluster\"]"
+        },
+        {
+            "name":"kubernetes_pod_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/PodAlert_pci_cluster_1",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_pod_alerts[\"pci_cluster_1\"]"
+        },
+        {
+            "name":"kubernetes_pod_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/PodAlert_pci_cluster_2",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_pod_alerts[\"pci_cluster_2\"]"
+        },
+        {
+            "name":"kubernetes_pod_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/PodAlert_pci_cluster_legacy",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_pod_alerts[\"pci_cluster_legacy\"]"
+        },
+        {
+            "name":"kubernetes_pod_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/PodAlert_staging_cluster_1",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_pod_alerts[\"staging_cluster_1\"]"
+        },
+        {
+            "name":"kubernetes_pod_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"CPE (DEV)/PodAlert_staging_cluster_2",
+            "tf_address":"module.alerts_kubernetes.mimir_rule_group_alerting.kubernetes_pod_alerts[\"staging_cluster_2\"]"
+        },
+        {
+            "name":"Mysql_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DBA (DEV)/MySqlAlerts_MySQL_dev1",
+            "tf_address":"module.alerts_mysql.mimir_rule_group_alerting.Mysql_alerts[\"MySQL_dev1\"]"
+        },
+        {
+            "name":"compute_node_network_alert",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SRE (DEV)/ComputeNodeNetworkAlert_SRE_corp",
+            "tf_address":"module.alerts_network_sre.mimir_rule_group_alerting.compute_node_network_alert[\"SRE_corp\"]"
+        },
+        {
+            "name":"compute_node_network_alert",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SRE (DEV)/ComputeNodeNetworkAlert_SRE_dev",
+            "tf_address":"module.alerts_network_sre.mimir_rule_group_alerting.compute_node_network_alert[\"SRE_dev\"]"
+        },
+        {
+            "name":"compute_node_network_alert",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SRE (DEV)/ComputeNodeNetworkAlert_SRE_sandboxprod",
+            "tf_address":"module.alerts_network_sre.mimir_rule_group_alerting.compute_node_network_alert[\"SRE_sandboxprod\"]"
+        },
+        {
+            "name":"Redis_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"Payments (DEV)/RedisAlerts_Payments_dev",
+            "tf_address":"module.alerts_redis_dev_payments.mimir_rule_group_alerting.Redis_alerts[\"Payments_dev\"]"
+        },
+        {
+            "name":"Redis_alerts",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SRE (DEV)/RedisAlerts_SRE_dev",
+            "tf_address":"module.alerts_redis_dev_sre.mimir_rule_group_alerting.Redis_alerts[\"SRE_dev\"]"
+        },
+        {
+            "name":"systemd_unit_alert",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"DevOps (DEV)/SystemdUnitAlerts_DevOps_dev",
+            "tf_address":"module.devops_alerts_systemd_unit.mimir_rule_group_alerting.systemd_unit_alert[\"DevOps_dev\"]"
+        },
+        {
+            "name":"systemd_unit_alert",
+            "resource_type":"mimir_rule_group_alerting",
+            "rsc_id":"SRE (DEV)/SystemdUnitAlerts_SRE_dev",
+            "tf_address":"module.sre_alerts_systemd_unit.mimir_rule_group_alerting.systemd_unit_alert[\"SRE_dev\"]"
+        }
+    ],
+    "terraform_version":"1.2.3",
+    "workspace":"dev-grafana-alerts"
+}

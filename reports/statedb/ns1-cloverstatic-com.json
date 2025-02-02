@@ -1,0 +1,37 @@
+{
+    "repo":"clover/ns1-cloverstatic-com",
+    "resources":[
+        {
+            "name":"cloverstatic_clover_com_a",
+            "resource_type":"ns1_record",
+            "rsc_id":"60124c2059f0d600abf34bca",
+            "tf_address":"ns1_record.cloverstatic_clover_com_a"
+        },
+        {
+            "name":"cloverstatic_com_ns",
+            "resource_type":"ns1_record",
+            "rsc_id":"5f1f11c085b94700bc012e3e",
+            "tf_address":"ns1_record.cloverstatic_com_ns"
+        },
+        {
+            "name":"dev_cloverstatic_com_a",
+            "resource_type":"ns1_record",
+            "rsc_id":"60620760a4ab1700b1c6fd80",
+            "tf_address":"ns1_record.dev_cloverstatic_com_a"
+        },
+        {
+            "name":"zone_cloverstatic_com",
+            "resource_type":"ns1_zone",
+            "rsc_id":"5f1f11c085b94700bc012e39",
+            "tf_address":"ns1_zone.zone_cloverstatic_com"
+        },
+        {
+            "name":"vault_secrets_ns1-cloverstatic-com",
+            "resource_type":"vault_generic_secret",
+            "rsc_id":"terraform/workspaces/ns1-cloverstatic-com",
+            "tf_address":"vault_generic_secret.vault_secrets_ns1-cloverstatic-com"
+        }
+    ],
+    "terraform_version":"1.2.3",
+    "workspace":"ns1-cloverstatic-com"
+}

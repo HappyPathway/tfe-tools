@@ -1,0 +1,11 @@
+[
+    "terraform-google-service",
+    "terraform-google-service-bootdisk",
+    "terraform-google-service-ha",
+    "terraform-google-service_nat",
+    "terraform-google-service_datadisk_nat",
+    "terraform-google-service_datadisk",
+    "terraform-google-singleinstance",
+    "terraform-google-router",
+]
+

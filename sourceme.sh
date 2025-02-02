@@ -1,0 +1,1 @@
+alias tfmodupdates="docker run -e GITHUB_USER=${GITHUB_USER} -e GITHUB_TOKEN=${GITHUB_TOKEN} -v ${HOME}/.terraformrc:/root/.terraformrc/ gcr.io/clover-container-registries/clover-tfe-inspector/modupdates:latest"

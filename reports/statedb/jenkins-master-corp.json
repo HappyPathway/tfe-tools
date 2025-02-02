@@ -1,0 +1,6 @@
+{
+    "repo":"clover/jenkins-master",
+    "resources":[],
+    "terraform_version":"1.2.3",
+    "workspace":"jenkins-master-corp"
+}

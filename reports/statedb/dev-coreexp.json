@@ -1,0 +1,6 @@
+{
+    "repo":"clover/dev-coreexp",
+    "resources":[],
+    "terraform_version":"1.2.3",
+    "workspace":"dev-coreexp"
+}

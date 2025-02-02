@@ -1,0 +1,1 @@
+docker run -it -h tfe-tools -v ${HOME}/.ssh:/root/.ssh -v ${HOME}/.terraform.d/credentials.tfrc.json:/root/.terraform.d/credentials.tfrc.json -p 8888:8888 -v ${PWD}:/opt/tfe-tools tfe-tools:latest

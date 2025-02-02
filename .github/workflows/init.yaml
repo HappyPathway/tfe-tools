@@ -1,0 +1,64 @@
+name: "init"
+on:
+  workflow_call:
+    inputs:
+      approle_id:
+        required: true
+        type: string
+    secrets:
+      ghe_token:
+        required: true
+      approle_secret:
+        required: true
+    outputs:
+      gcp_credentials:
+        description: "GCP Credentials"
+        value: ${{ jobs.init.outputs.gcp_credentials }}
+
+jobs:
+  init:
+    runs-on: self-hosted
+    permissions:
+      pull-requests: write
+    outputs:
+      gcp_credentials: ${{ steps.terraform-namespace.outputs.GCP_CREDENTIALS }}
+    name: init
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+        token: ${{ secrets.ghe_token }}
+        path: $GITHUB_WORKSPACE
+              
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Vault Auth (Terraform Namespace)
+      id: terraform-namespace
+      uses: hashicorp/vault-action@v2.6.0
+      with:
+        url: https://vault-usprod01.corp.clover.com
+        method: approle
+        roleId: ${{ inputs.approle_id }}
+        secretId: ${{ secrets.approle_secret }}
+        tlsSkipVerify: true
+        namespace: terraform
+        path: tfe_approle
+        secrets: |
+          terraform/gcp-projects/clover-admin-plane json_key | GCP_CREDENTIALS
+
+    - name: 'Google Auth'
+      id: 'auth' 
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: ${{ steps.terraform-namespace.outputs.GCP_CREDENTIALS }}
+        create_credentials_file: true
+
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v1'
+
+    - run: |
+        gcloud auth activate-service-account \
+        ${{fromJson(steps.terraform-namespace.outputs.GCP_CREDENTIALS).client_email}} \
+        --key-file=${{steps.auth.outputs.credentials_file_path}}

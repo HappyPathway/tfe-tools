@@ -1,0 +1,88 @@
+# gcr.io/clover-container-registries/ghe-runners/pytfe-core
+name: "Terraform Apply"
+on:
+  schedule:
+    - cron:  '*/60 * * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: update
+    runs-on: self-hosted
+    container:
+      image: gcr.io/clover-container-registries/ghe-runners/pytfe-core:latest
+      credentials:
+        username: _json_key
+        password: "${{ secrets.CLOVER_CONTAINER_REGISTRIES_CREDENTIALS }}"
+      volumes:
+        - ${{ github.workspace }}:/work
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.ghe_token }}
+                
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.2.3
+          cli_config_credentials_token: ${{ secrets.TFE_TOKEN }}
+          cli_config_credentials_hostname: terraform.corp.clover.com
+          
+      - name: Vault Auth (Terraform Namespace)
+        id: terraform-namespace
+        uses: hashicorp/vault-action@v2.6.0
+        with:
+          url: https://vault-usprod01.corp.clover.com
+          method: approle
+          roleId: "${{ vars.TERRAFORM_APPROLE_ROLE_ID }}"
+          secretId: "${{ secrets.TERRAFORM_APPROLE_SECRET_ID }}"
+          tlsSkipVerify: true
+          namespace: terraform
+          path: tfe_approle
+          secrets: |
+            terraform/gcp-projects/clover-admin-plane json_key | GCP_CREDENTIALS
+
+      - name: 'Google Auth'
+        id: 'auth' 
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: ${{ steps.terraform-namespace.outputs.GCP_CREDENTIALS }}
+          create_credentials_file: true
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - run: |
+          gcloud auth activate-service-account \
+          ${{fromJson(steps.terraform-namespace.outputs.GCP_CREDENTIALS).client_email}} \
+          --key-file=${{steps.auth.outputs.credentials_file_path}}
+          
+      # perform prerequisite work here
+      - name: update cache and pull managed zones
+        working-directory: /work
+        env: 
+          TFE_TOKEN: "${{ secrets.TFE_TOKEN }}"
+        run: |
+          python3 checks/managed_zones.py
+
+      # perform prerequisite work here
+      - id: 'upload-file'
+        working-directory: /work/reports
+        run: |
+          gsutil cp managed_zones.json gs://clover-config-stash/
+
+      # apply terraform
+      - id: 'terraform-apply'
+        working-directory: /work/terraform
+        run: |
+          cp ../reports/managed_zones.json .
+          terraform init
+          terraform apply -auto-approve -lock-timeout=30s
+          

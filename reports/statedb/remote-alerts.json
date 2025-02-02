@@ -1,0 +1,25 @@
+{
+    "repo":"clover/grafana-alerts",
+    "resources":[
+        {
+            "name":"data_engineering_1",
+            "resource_type":"grafana_rule_group",
+            "rsc_id":"0:c5e8fde3-71b7-4098-85ab-cb35b015097c;DataEngineering_1",
+            "tf_address":"grafana_rule_group.data_engineering_1"
+        },
+        {
+            "name":"rule_group_SRE05",
+            "resource_type":"grafana_rule_group",
+            "rsc_id":"0:c5e8fde3-71b7-4098-85ab-cb35b015097c;SRE_5",
+            "tf_address":"grafana_rule_group.rule_group_SRE05"
+        },
+        {
+            "name":"clover_alerts",
+            "resource_type":"mimir_alertmanager_config",
+            "rsc_id":"clovernetwork",
+            "tf_address":"mimir_alertmanager_config.clover_alerts"
+        }
+    ],
+    "terraform_version":"1.2.3",
+    "workspace":"remote-alerts"
+}

@@ -1,0 +1,16 @@
+{
+    "feedback-service":[
+        "feedback-db-dev",
+        "feedback-db-prod"
+    ],
+    "grafana-alerts":[
+        "dev-grafana-alerts",
+        "eu-grafana-alerts",
+        "la-grafana-alerts",
+        "na-grafana-alerts"
+    ],
+    "nit-cloudfunctions":[
+        "nit-cloudfunctions-nonprod",
+        "nit-cloudfunctions-prod"
+    ]
+}

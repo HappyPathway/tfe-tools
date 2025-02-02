@@ -1,0 +1,73 @@
+#!/usr/bin/env python3
+import os
+import json
+import sys
+import hcl2
+from glob import glob
+import subprocess
+from tempfile import mkdtemp
+import shutil
+from github import Github
+from github.GithubException import UnknownObjectException as gheUnknownObjectException
+from tfe.core.organization import Organization
+from tfe.core import session
+from tfe import Workspace as TFEWorkspace
+import re
+from collections import defaultdict
+from helpers import tfe_token
+
+class TFEException(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+        super().__init__(msg)
+
+def tfe_ws(terraform_url, terraform_org, workspace_name):
+    try:
+        tkn = tfe_token(terraform_url, 
+            os.path.join(
+                os.environ.get("HOME"), 
+                ".terraformrc"
+            )
+        )
+    except TFEException:
+        sys.stderr.write("Could not find credentials file. exiting.\n")
+        sys.exit(1)
+
+    session.TFESession("https://{0}".format(terraform_url), tkn)
+    # org = Organization(terraform_org)
+    # ws = org.workspaces()
+    tfe_ws = TFEWorkspace(api="https://{0}".format(terraform_url), atlas_token=tkn, organization=terraform_org, workspace_name=workspace_name)
+    return tfe_ws
+
+def var_types(ws):
+    _var_types = dict(
+        sensitive=ws.sensitive_var,
+        var=ws.var,
+        hcl=ws.hcl_var,
+        sensitive_hcl_var=ws.sensitive_hcl_var,
+        sensitive_env_var=ws.sensitive_env_var,
+        env_var=ws.env_var
+    )
+    return _var_types
+
+if __name__ == '__main__':
+    from optparse import OptionParser
+    parser = OptionParser()
+    parser.add_option("--var", action="append")
+    parser.add_option("--type", default="var")
+    parser.add_option("--mode")
+    parser.add_option("--org", default="clover")
+    parser.add_option("--workspace")
+    opt, args = parser.parse_args()
+    ws = tfe_ws("terraform.corp.clover.com", opt.org, opt.workspace)
+    if opt.mode in ["rm", "delete"]:
+        for var in [var.split(":")[0] for var  in opt.var]:
+            print(f"removing {var} from {ws.name}")
+            print(f"ws.rmvars({var})")
+        
+    vars_dict = dict()
+    for var in opt.var:
+        var_key = var.split(":")[0]
+        var_val = var.split(":")[1]
+        vars_dict.update({f"{var_key}": var_val})
+        var_types(ws).get(opt.type)(**vars_dict)

@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+import json
+import os
+import re
+
+repo_template = "git@github.corp.clover.com:clover/terraform-{mod_provider}-{mod_name}.git"
+
+def main(key, source):
+    mods = list()
+
+    try:
+        modules_file = open(os.path.join(os.getcwd(), ".terraform/modules/modules.json"))
+    except FileNotFoundError:
+        print('No modules.json found; are you in a module dir and have you run `terraform init`?')
+    else:
+        with modules_file:
+            d = json.loads(modules_file.read())
+    
+    if source:
+        source_regex = re.compile(f"{source}$")
+        for mod in d.get('Modules'):
+            m = source_regex.search(mod.get('Source'))
+            if m:
+                source = mod.get('Source') 
+                if not source.startswith("."):
+                    source_parts = source.split("/")
+                    mod["repo"] = repo_template.format(
+                        mod_provider=source_parts[-1], 
+                        mod_name=source_parts[-2])
+                mods.append(mod)
+    if key:
+        for mod in d.get('Modules'):
+            if mod.get('Key').endswith(key):
+                source = mod.get('Source') 
+                if not source.startswith("."):
+                    source_parts = source.split("/")
+                    mod["repo"] = repo_template.format(
+                        mod_provider=source_parts[-1], 
+                        mod_name=source_parts[-2])
+                mods.append(mod)
+    return mods
+
+if __name__ == '__main__':
+    from optparse import OptionParser
+    p = OptionParser()
+    for cli_param in ["key", "source"]:
+        p.add_option(f"--{cli_param}", default=False)
+    opt, arg = p.parse_args()
+    print(
+        json.dumps(
+            main(opt.key, opt.source),
+            separators=(',', ':'),
+            indent=4,
+            sort_keys=True
+        )
+    )
+        
+

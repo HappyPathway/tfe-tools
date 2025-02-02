@@ -1,0 +1,43 @@
+# gcr.io/clover-container-registries/ghe-runners/pytfe-core
+name: "List Modules"
+on:
+  schedule:
+    - cron:  '0 23 * * *'
+  workflow_dispatch:
+
+jobs:
+  init:
+    uses: ./.github/workflows/init.yaml
+    secrets:
+      ghe_token: "${{ secrets.GHE_TOKEN }}"
+      approle_secret: "${{ secrets.TERRAFORM_APPROLE_SECRET_ID }}"
+    with:
+      approle_id: "${{ vars.TERRAFORM_APPROLE_ROLE_ID }}"
+      
+
+  build:
+    name: list modules
+    runs-on: self-hosted
+    container:
+      image: gcr.io/clover-container-registries/ghe-runners/pytfe-core:latest
+      credentials:
+        username: _json_key
+        password: "${{ secrets.CLOVER_CONTAINER_REGISTRIES_CREDENTIALS }}"
+      volumes:
+        - ${{ github.workspace }}:/work
+    permissions:
+      pull-requests: write
+    steps:
+      - name: list modules
+        env: 
+          TFE_TOKEN: "${{ secrets.TFE_TOKEN }}"
+          GITHUB_TOKEN: "${{ secrets.GHE_TOKEN }}"
+          GITHUB_USER: "${{ vars.GHE_USER }}"
+        run: |
+          python3 list_modules.py 
+
+      - id: 'upload-file'
+        run: |
+          gsutil cp ./reports/tf_mods.json gs://clover-config-stash/reports/tf_mods.json
+          gsutil cp ./reports/tf_mods_no_deps.json gs://clover-config-stash/reports/tf_mods_no_deps.json
+          

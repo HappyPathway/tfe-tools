@@ -1,0 +1,19 @@
+{
+    "repo":"clover/external-artifacts",
+    "resources":[
+        {
+            "name":"external_artifacts",
+            "resource_type":"google_artifact_registry_repository",
+            "rsc_id":"projects/clover-external-artifacts/locations/us-west1/repositories/clover-web-libraries",
+            "tf_address":"google_artifact_registry_repository.external_artifacts"
+        },
+        {
+            "name":"fiserv_nexus",
+            "resource_type":"google_service_account",
+            "rsc_id":"projects/clover-external-artifacts/serviceAccounts/fiserv-nexus@clover-external-artifacts.iam.gserviceaccount.com",
+            "tf_address":"google_service_account.fiserv_nexus"
+        }
+    ],
+    "terraform_version":"1.2.3",
+    "workspace":"external-artifacts"
+}

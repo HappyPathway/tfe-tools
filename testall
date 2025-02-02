@@ -1,0 +1,12 @@
+#!/bin/bash
+source=${1}
+branch=${2}
+file_source=$(echo ${source} | tr / _)
+rm ${file_source}-${branch}.sh || echo
+# https://github.corp.clover.com/clover/tfe-tools/blob/main/modtest
+# https://github.corp.clover.com/clover/tfe-tools/blob/main/mod_versions
+for x in $(mod_versions --source=${source} | jq -n "inputs[].Key")
+do
+	echo modtest --key=${x} --branch=${branch} >> ${file_source}-${branch}.sh
+done
+bash ${file_source}-${branch}.sh
