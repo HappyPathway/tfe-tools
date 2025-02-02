@@ -3,26 +3,7 @@ import json
 import os
 from collections import defaultdict
 import copy
-
-def find_mod_source(source):
-    script = "find_all_mods.py"
-    inputfile = "reports/tf_mods.json"
-    cmd = "python3 {0}/utils/{1} {2} {3}"
-    inputfile = os.path.join(os.path.dirname(__file__), inputfile)
-    cmd = cmd.format(os.path.dirname(__file__), script, source, inputfile)
-    p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out, err = p.communicate()
-    return json.loads(str(out.decode('utf-8')))
-
-def find_ws_source(source):
-    script = "find_all_ws.py"
-    inputfile = "reports/tf_ws_mods.json"
-    cmd = "python3 {0}/utils/{1} {2} {3}"
-    inputfile = os.path.join(os.path.dirname(__file__), inputfile)
-    cmd = cmd.format(os.path.dirname(__file__), script, source, inputfile)
-    p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out, err = p.communicate()
-    return json.loads(str(out.decode('utf-8')))
+from tfe_tools.common import find_mod_source, find_ws_source
 
 def main(source, dump_modules, dump_workspaces):
     # terraform.corp.clover.com/clover/datacenter_infra/google 

@@ -3,6 +3,7 @@ import json
 import sys
 import os
 from collections import defaultdict
+from tfe_tools.common import find_interesting_records
 
 def main(output):
     with open("./reports/datasources/vault_generic_secret.json") as datasource_input:

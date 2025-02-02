@@ -4,15 +4,8 @@ from collections import defaultdict
 import os
 import sys
 
-from module_versions import main as mod_version_main
+from tfe_tools.common import get_latest_versions
 
-def get_latest_versions():
-    d = json.loads(open(os.path.expandvars(os.path.join(os.path.dirname(__file__), "./reports/mod_versions.json"))).read())
-    modules = dict()
-    for module in d:
-        modules[d.get(module).get('source')] = d.get(module).get('latest_version')
-    return modules
-    
 def main(terraform_base, terraform_url):
     mod_version_main(terraform_base, terraform_url)
     latest_versions = get_latest_versions()
