@@ -43,8 +43,8 @@ def main(terraform_base, terraform_url):
 if __name__ == '__main__':
     from optparse import OptionParser
     p = OptionParser()
-    p.add_option("-t", default="https://terraform.corp.clover.com", dest="terraform_base")
-    p.add_option("-u", default="terraform.corp.clover.com", dest="terraform_url")
+    p.add_option("-t", default="https://terraform.example.com", dest="terraform_base")
+    p.add_option("-u", default="terraform.example.com", dest="terraform_url")
     opt, arg = p.parse_args()
     print(
         json.dumps(

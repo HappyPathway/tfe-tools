@@ -197,7 +197,7 @@ if __name__ == '__main__':
     p.add_option("--key")
     p.add_option("--query")
     p.add_option("--type", default=None)
-    p.add_option("-g", dest="github_base",   default="https://github.corp.clover.com")
+    p.add_option("-g", dest="github_base",   default="https://github.example.com")
     p.add_option("-b", dest='basedir',      default=os.path.join(os.environ.get("HOME"), "git/workspaces"))
     p.add_option("-w", "--workspace", dest="workspaces", action="append", default=None)
     p.add_option("--id", dest="show_id", default=False, action="store_true")

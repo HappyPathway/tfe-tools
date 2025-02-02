@@ -7,7 +7,7 @@ def vault_auth_check(token, policy):
         "X-Vault-Namepsace": "terraform"
     }
     resp = requests.get(
-        "https://vault-usprod01.prod.dsm01.clover.network:8200/v1/auth/token/lookup-self",
+        "https://vault-usprod01.prod.dsm01.network:8200/v1/auth/token/lookup-self",
         headers=headers,
         verify=False
     ).json()

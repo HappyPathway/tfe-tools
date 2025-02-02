@@ -1,4 +1,3 @@
-# gcr.io/clover-container-registries/ghe-runners/pytfe-core
 name: "List Modules"
 on:
   schedule:
@@ -19,10 +18,10 @@ jobs:
     name: list modules
     runs-on: self-hosted
     container:
-      image: gcr.io/clover-container-registries/ghe-runners/pytfe-core:latest
+      image: gcr.io/container-registries/ghe-runners/pytfe-core:latest
       credentials:
         username: _json_key
-        password: "${{ secrets.CLOVER_CONTAINER_REGISTRIES_CREDENTIALS }}"
+        password: "${{ secrets.CONTAINER_REGISTRIES_CREDENTIALS }}"
       volumes:
         - ${{ github.workspace }}:/work
     permissions:
@@ -38,6 +37,5 @@ jobs:
 
       - id: 'upload-file'
         run: |
-          gsutil cp ./reports/tf_mods.json gs://clover-config-stash/reports/tf_mods.json
-          gsutil cp ./reports/tf_mods_no_deps.json gs://clover-config-stash/reports/tf_mods_no_deps.json
-          
+          gsutil cp ./reports/tf_mods.json gs://config-stash/reports/tf_mods.json
+          gsutil cp ./reports/tf_mods_no_deps.json gs://config-stash/reports/tf_mods_no_deps.json

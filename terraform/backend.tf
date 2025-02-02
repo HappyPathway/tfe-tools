@@ -1,7 +1,7 @@
 terraform {
   cloud {
-    hostname     = "terraform.corp.clover.com"
-    organization = "clover"
+    hostname     = "terraform.example.com"
+    organization = "example"
 
     workspaces {
       name = "tfe-tools"

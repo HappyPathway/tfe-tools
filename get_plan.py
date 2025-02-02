@@ -95,8 +95,8 @@ def main(opt):
 if __name__ == '__main__':
     from optparse import OptionParser
     p = OptionParser()
-    p.add_option("--api", dest="api", default="terraform.corp.clover.com")
-    p.add_option("--org", dest="org", default="clover")
+    p.add_option("--api", dest="api", default="terraform.example.com")
+    p.add_option("--org", dest="org", default="example")
     p.add_option("-w", dest="workspace")
     p.add_option("-o", dest="output")
     p.add_option("-r", dest="run")

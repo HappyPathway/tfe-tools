@@ -90,7 +90,7 @@ def main(github_base, terraform_base, terraform_url, base_dir, mod_regex):
     )
 
     session.TFESession(terraform_base, tkn)
-    Organization("clover")
+    Organization("example")
     rm = RegistryModule()
     tf_mods = modlist(rm, [], rm.list_url)
     mod_versions = defaultdict(set)
@@ -155,9 +155,9 @@ def main(github_base, terraform_base, terraform_url, base_dir, mod_regex):
 if __name__ == '__main__':
     from optparse import OptionParser
     p = OptionParser()
-    p.add_option("-g", default="https://github.corp.clover.com", dest="github_base")
-    p.add_option("-t", default="https://terraform.corp.clover.com", dest="terraform_base")
-    p.add_option("-u", default="terraform.corp.clover.com", dest="terraform_url")
+    p.add_option("-g", default="https://github.example.com", dest="github_base")
+    p.add_option("-t", default="https://terraform.example.com", dest="terraform_base")
+    p.add_option("-u", default="terraform.example.com", dest="terraform_url")
     p.add_option("-b", dest='base_dir', default=mkdtemp(prefix="/tmp/"))
     p.add_option("-m", dest="mod_regex")
     opt, arg = p.parse_args()
