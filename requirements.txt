@@ -10,3 +10,4 @@ pygit2==1.10.0
 google-cloud-storage
 PyGithub==1.55
 python-terraform==0.10.1
+pytest
