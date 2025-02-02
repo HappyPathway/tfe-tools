@@ -2,7 +2,7 @@ import os
 import json
 import pytest
 from unittest.mock import patch, mock_open
-from tfe_tools.common import sanitize_path, tfe_token, get_requests_session, mod_dependencies, find_mod_source
+from tfe_tools.common import sanitize_path, tfe_token, get_requests_session, mod_dependencies, find_mod_source, TFEException, query_match, get_attr, filter_type
 
 def test_sanitize_path():
     assert sanitize_path("~/test") == os.path.abspath(os.path.expanduser("~/test"))

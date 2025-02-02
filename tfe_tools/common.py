@@ -8,6 +8,11 @@ import hcl2
 from glob import glob
 from requests import Session
 
+class TFEException(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+        super().__init__(msg)
+
 def sanitize_path(config):
     path = os.path.expanduser(config)
     path = os.path.expandvars(path)
@@ -133,6 +138,19 @@ def find_interesting_records(key, value, resource_type, workspaces=[], base_dir=
                 )
                 interest[data.get("repo")]['addresses'].append(rsc.get('tf_address'))
     return results, [interest.get(repo_name) for repo_name in interest if interest.get(repo_name).get('addresses')]
+
+def query_match(rsc, key, value, resource_type):
+    if rsc.get('resource_type') != resource_type:
+        return False
+    if rsc.get(key) != value:
+        return False
+    return True
+
+def get_attr(instance, attr):
+    return getattr(instance, attr, None)
+
+def filter_type(instances, instance_type):
+    return [instance for instance in instances if isinstance(instance, instance_type)]
 
 def main(source, dump_modules, dump_workspaces):
     # terraform.corp.clover.com/clover/datacenter_infra/google 
