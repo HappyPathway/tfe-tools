@@ -1,12 +1,8 @@
 semantic-version==2.8.4
 pyhcl==0.4.4
 python-hcl2==3.0.5
-pygit==0.1
-pygit2==1.10.0
 gitdb==4.0.9
 GitPython==3.1.27
-pygit==0.1
-pygit2==1.10.0
 google-cloud-storage
 PyGithub==1.55
 python-terraform==0.10.1
