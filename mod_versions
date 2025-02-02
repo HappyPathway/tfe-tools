@@ -2,6 +2,7 @@
 import json
 import os
 import re
+import argparse
 
 repo_template = "git@github.corp.clover.com:clover/terraform-{mod_provider}-{mod_name}.git"
 
@@ -41,18 +42,15 @@ def main(key, source):
     return mods
 
 if __name__ == '__main__':
-    from optparse import OptionParser
-    p = OptionParser()
-    for cli_param in ["key", "source"]:
-        p.add_option(f"--{cli_param}", default=False)
-    opt, arg = p.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--key", default=False)
+    parser.add_argument("--source", default=False)
+    args = parser.parse_args()
     print(
         json.dumps(
-            main(opt.key, opt.source),
+            main(args.key, args.source),
             separators=(',', ':'),
             indent=4,
             sort_keys=True
         )
     )
-        
-

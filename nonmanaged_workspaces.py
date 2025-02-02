@@ -18,6 +18,7 @@ from urllib.parse import urlencode, quote_plus
 from pathlib import Path
 import helpers
 import re
+import argparse
 
 def sanitize_path(config):
     path = os.path.expanduser(config)
@@ -78,12 +79,10 @@ def main(terraform_url, terraform_org, output, workspace_name=False):
 
 
 if __name__ == "__main__":
-    from optparse import OptionParser
-    p = OptionParser()
-    p.add_option("-t", dest="terraform_url", default="terraform.corp.clover.com")
-    p.add_option("--org", dest="terraform_org", default="clover")
-    p.add_option("-o", dest='output', default=os.path.join(os.path.dirname(__file__), "./reports/nonmanaged-workspaces.json"))
-    p.add_option("-w", dest="workspace", default=None)
-    opt, arg = p.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-t", dest="terraform_url", default="terraform.corp.clover.com")
+    parser.add_argument("--org", dest="terraform_org", default="clover")
+    parser.add_argument("-o", dest='output', default=os.path.join(os.path.dirname(__file__), "./reports/nonmanaged-workspaces.json"))
+    parser.add_argument("-w", dest="workspace", default=None)
+    opt = parser.parse_args()
     main(opt.terraform_url, opt.terraform_org, opt.output, opt.workspace)
-    

@@ -71,11 +71,10 @@ def main(terraform_url, terraform_org, workspace_name):
     )
 
 if __name__ == "__main__":
-    from optparse import OptionParser
-    p = OptionParser()
-    p.add_option("-t", dest="terraform_url", default="terraform.corp.clover.com")
-    p.add_option("--org", dest="terraform_org", default="clover")
-    p.add_option("-w", dest="workspace_name")
-    opt, arg = p.parse_args()
-    main(opt.terraform_url, opt.terraform_org, opt.workspace_name)
-    
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-t", dest="terraform_url", default="terraform.corp.clover.com")
+    parser.add_argument("--org", dest="terraform_org", default="clover")
+    parser.add_argument("-w", dest="workspace_name")
+    args = parser.parse_args()
+    main(args.terraform_url, args.terraform_org, args.workspace_name)

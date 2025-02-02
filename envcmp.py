@@ -56,10 +56,9 @@ def main(cmp_a, cmp_b):
         )
     )
 if __name__ == '__main__':
-    from optparse import OptionParser
-    parser = OptionParser()
-    opt, args = parser.parse_args()
-    if len(args) != 2:
-        sys.stderr.write("Must specific two environments!\n")
-        sys.exit(1)
-    main(args[0], args[1])
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("cmp_a", help="First environment to compare")
+    parser.add_argument("cmp_b", help="Second environment to compare")
+    args = parser.parse_args()
+    main(args.cmp_a, args.cmp_b)

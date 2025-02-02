@@ -58,13 +58,13 @@ def main(terraform_url, terraform_org):
     
 
 if __name__ == "__main__":
-    from optparse import OptionParser
-    p = OptionParser()
-    p.add_option("-t", dest="terraform_url", default="terraform.corp.clover.com")
-    p.add_option("-o", dest="terraform_org", default="clover")
-    opt, arg = p.parse_args()
-    main(opt.terraform_url, opt.terraform_org)
-    for ws in main(opt.terraform_url, opt.terraform_org):
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-t", dest="terraform_url", default="terraform.corp.clover.com")
+    parser.add_argument("-o", dest="terraform_org", default="clover")
+    args = parser.parse_args()
+    main(args.terraform_url, args.terraform_org)
+    for ws in main(args.terraform_url, args.terraform_org):
         print(
             "\nWorkspace: {0}".format(ws[0]),
             "\n\tPlanned: {0}".format(ws[1]),
