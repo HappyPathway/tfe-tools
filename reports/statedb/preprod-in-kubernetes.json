@@ -1,6 +1,0 @@
-{
-    "repo":"clover/preprod-in-kubernetes",
-    "resources":[],
-    "terraform_version":"1.2.3",
-    "workspace":"preprod-in-kubernetes"
-}
