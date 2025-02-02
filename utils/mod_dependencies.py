@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import os
+from tfe_tools.common import sanitize_path, tfe_token, get_requests_session, mod_dependencies
 
 def main(module, input):
     with open(input, "r") as tf_mods:

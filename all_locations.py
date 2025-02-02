@@ -3,7 +3,7 @@ import json
 import os
 from collections import defaultdict
 import copy
-from tfe_tools.common import find_mod_source, find_ws_source
+from tfe_tools.common import find_mod_source, find_ws_source, sanitize_path, tfe_token, get_requests_session, mod_dependencies
 
 def main(source, dump_modules, dump_workspaces):
     # terraform.corp.clover.com/clover/datacenter_infra/google 

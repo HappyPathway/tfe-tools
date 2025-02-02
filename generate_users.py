@@ -5,7 +5,8 @@ import os
 import hcl2
 import json
 from jinja2 import Template
-import helpers
+from tfe_tools.common import sanitize_path, tfe_token, get_requests_session, mod_dependencies
+
 class TerraformClientException(Exception):
     def __init__(self, *args, **kwargs):
         self.message = kwargs.get('message')
@@ -18,14 +19,8 @@ class TerraformClientException(Exception):
         return self.messsage
 
 
-def sanitize_path(config):
-    path = os.path.expanduser(config)
-    path = os.path.expandvars(path)
-    path = os.path.abspath(path)
-    return path
-
 def init_session(terraform_url):
-    token = helpers.tfe_token(terraform_url, 
+    token = tfe_token(terraform_url, 
         "{0}/.terraformrc".format(
             os.environ.get("HOME")
         )

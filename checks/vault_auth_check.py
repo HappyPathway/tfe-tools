@@ -1,5 +1,5 @@
 #!/usr/bin/evn python3
-import requests
+from tfe_tools.common import sanitize_path, tfe_token, get_requests_session, mod_dependencies
 
 def vault_auth_check(token, policy):
     headers = {
@@ -22,6 +22,6 @@ if __name__ == '__main__':
     from optparse import OptionParser
     parser = OptionParser()
     parser.add_option("--token")
-    parser.add_option("--policy")
+    parser.add.option("--policy")
     opt, arg = parser.parse_args()
     print(vault_auth_check(opt.token, opt.policy))

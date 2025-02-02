@@ -5,7 +5,7 @@ from collections import defaultdict
 import os
 import json
 import hashlib
-from helpers import sanitize_path
+from tfe_tools.common import sanitize_path, tfe_token, get_requests_session, mod_dependencies
 from projects import project_types
 class WorkspaceAddrs(object):
 
