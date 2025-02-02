@@ -48,7 +48,7 @@ def clone(repo_clone_url):
 
 
 def dependencies(ws_name):
-    module_source_regex = re.compile('source\s*=\s*"terraform.corp.clover.com/clover/(?P<module>[^"]*)"')
+    module_source_regex = re.compile('source\s*=\s*"terraform.example.com/example/(?P<module>[^"]*)"')
     dependencies = list()
     for tf_file_name in glob("*.tf"):
         with open(tf_file_name, 'r') as tf_file:
@@ -101,10 +101,10 @@ def main(terraform_url, terraform_org, github_base, basedir, git_namespace, work
 if __name__ == "__main__":
     from optparse import OptionParser
     p = OptionParser()
-    p.add_option("-t", dest="terraform_url", default="terraform.corp.clover.com")
-    p.add_option("-o", dest="terraform_org", default="clover")
-    p.add_option("-g", dest="github_base",   default="https://github.corp.clover.com")
-    p.add_option("-n", dest="git_namespace", default="clover")
+    p.add_option("-t", dest="terraform_url", default="terraform.example.com")
+    p.add_option("-o", dest="terraform_org", default="example")
+    p.add_option("-g", dest="github_base",   default="https://github.example.com")
+    p.add_option("-n", dest="git_namespace", default="example")
     p.add_option("-b", dest='base_dir',      default=mkdtemp(prefix="/tmp/"))
     p.add_option("-w", dest="workspace")
     opt, arg = p.parse_args()

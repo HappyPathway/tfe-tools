@@ -1,6 +1,6 @@
 data "tfe_policy_set" "config_stash" {
   name         = "tfe-tools"
-  organization = "clover"
+  organization = "example"
 }
 
 resource "tfe_policy_set_parameter" "managed_zones" {

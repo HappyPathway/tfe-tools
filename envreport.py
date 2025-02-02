@@ -91,7 +91,7 @@ def cmp_projects(db, cmp_projects):
     return workspace_data, [workspace[0] for workspace in workspaces]
 
 def main(output, project_type):
-    db = firestore.Client(project='clover-infra-db')
+    db = firestore.Client(project='example-infra-db')
     output = sanitize_path(output)
     if not os.path.isdir(output):
         os.makedirs(output)

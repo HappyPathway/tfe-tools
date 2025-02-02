@@ -138,8 +138,8 @@ def main(terraform_url, terraform_org, data_source_type, attr, workspace_name=Fa
 if __name__ == "__main__":
     from optparse import OptionParser
     p = OptionParser()
-    p.add_option("-u", dest="terraform_url", default="terraform.corp.clover.com")
-    p.add_option("--org", dest="terraform_org", default="clover")
+    p.add_option("-u", dest="terraform_url")
+    p.add_option("--org", dest="terraform_org")
     p.add_option("-o", dest='output', default=os.path.join(os.path.dirname(__file__), "./reports/"))
     p.add_option("-w", dest="workspace", default=None)
     p.add_option("-t", dest="type")

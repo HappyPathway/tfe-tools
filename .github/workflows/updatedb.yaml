@@ -10,10 +10,10 @@ jobs:
     name: update
     runs-on: self-hosted
     container:
-      image: gcr.io/clover-container-registries/ghe-runners/pytfe-core:latest
+      image: gcr.io/container-registries/ghe-runners/pytfe-core:latest
       credentials:
         username: _json_key
-        password: "${{ secrets.CLOVER_CONTAINER_REGISTRIES_CREDENTIALS }}"
+        password: "${{ secrets.CONTAINER_REGISTRIES_CREDENTIALS }}"
       volumes:
         - ${{ github.workspace }}:/work
     permissions:
@@ -32,7 +32,7 @@ jobs:
         id: terraform-namespace
         uses: hashicorp/vault-action@v2.6.0
         with:
-          url: https://vault-usprod01.corp.clover.com
+          url: https://vault-usprod01.corp.example.com
           method: approle
           roleId: "${{ vars.TERRAFORM_APPROLE_ROLE_ID }}"
           secretId: "${{ secrets.TERRAFORM_APPROLE_SECRET_ID }}"
@@ -40,7 +40,7 @@ jobs:
           namespace: terraform
           path: tfe_approle
           secrets: |
-            terraform/gcp-projects/clover-admin-plane json_key | GCP_CREDENTIALS
+            terraform/gcp-projects/admin-plane json_key | GCP_CREDENTIALS
 
       - name: 'Google Auth'
         id: 'auth' 
@@ -67,5 +67,5 @@ jobs:
       - id: 'upload-file'
         working-directory: /work
         run: |
-          gsutil -m rsync -rd ./reports/statedb gs://clover-config-stash/statedb
+          gsutil -m rsync -rd ./reports/statedb gs://config-stash/statedb
           
