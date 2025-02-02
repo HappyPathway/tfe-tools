@@ -3,6 +3,7 @@ import json
 from collections import defaultdict
 import os
 import sys
+import argparse
 
 from tfe_tools.common import get_latest_versions, sanitize_path, tfe_token, get_requests_session, mod_dependencies
 
@@ -34,14 +35,13 @@ def main(terraform_base, terraform_url):
     return module_keys
 
 if __name__ == '__main__':
-    from optparse import OptionParser
-    p = OptionParser()
-    p.add_option("-t", default="https://terraform.example.com", dest="terraform_base")
-    p.add_option("-u", default="terraform.example.com", dest="terraform_url")
-    opt, arg = p.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-t", default="https://terraform.example.com", dest="terraform_base")
+    parser.add_argument("-u", default="terraform.example.com", dest="terraform_url")
+    args = parser.parse_args()
     print(
         json.dumps(
-            main(opt.terraform_base, opt.terraform_url),
+            main(args.terraform_base, args.terraform_url),
             separators=(',', ':'),
             indent=4,
             sort_keys=True

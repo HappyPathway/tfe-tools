@@ -58,12 +58,12 @@ def main(bucket_name, base_dir, github_base, git_org, module):
     # )
 
 if __name__ == '__main__':
-    from optparse import OptionParser
-    p = OptionParser()
-    p.add_option("--bucket", default="clover-terratest-state")
-    p.add_option("-b", dest='base_dir', default=os.path.join(os.getcwd(), "terratest_statefiles"))
-    p.add_option("-g", default="https://github.corp.clover.com", dest="github_base")
-    p.add_option("-o", default="clover", dest="git_org")
-    p.add_option("--module")
-    opt, args = p.parse_args()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--bucket", default="clover-terratest-state")
+    parser.add_argument("-b", dest='base_dir', default=os.path.join(os.getcwd(), "terratest_statefiles"))
+    parser.add_argument("-g", default="https://github.corp.clover.com", dest="github_base")
+    parser.add_argument("-o", default="clover", dest="git_org")
+    parser.add_argument("--module")
+    opt = parser.parse_args()
     main(opt.bucket, opt.base_dir, opt.github_base, opt.git_org, opt.module)

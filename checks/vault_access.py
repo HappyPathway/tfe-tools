@@ -27,14 +27,14 @@ def main(output):
         )
 
 if __name__ == '__main__':
-    from optparse import OptionParser
-    p = OptionParser()
-    p.add_option("--output", default=os.path.join(
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output", default=os.path.join(
         os.path.join(
             os.path.dirname(__file__),
             os.path.pardir
         ), 
         "reports/vault_access.json"
     ))
-    opt, arg = p.parse_args()
-    main(opt.output)
+    args = parser.parse_args()
+    main(args.output)

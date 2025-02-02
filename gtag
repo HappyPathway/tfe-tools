@@ -2,6 +2,7 @@
 import semantic_version
 import subprocess
 import os
+import argparse
 
 def main(message, major, minor, patch):
     os.chdir(os.getcwd())
@@ -46,11 +47,10 @@ def main(message, major, minor, patch):
     out, _ = p.communicate()
 
 if __name__ == '__main__':
-    from optparse import OptionParser
-    p = OptionParser()
-    p.add_option("-m", dest="message")
-    p.add_option("--patch", dest="patch", default=True, action="store_true")
-    p.add_option("--minor", dest="minor", default=False, action="store_true")
-    p.add_option("--major", dest="major", default=False, action="store_true")
-    opt, args = p.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-m", dest="message")
+    parser.add_argument("--patch", dest="patch", default=True, action="store_true")
+    parser.add_argument("--minor", dest="minor", default=False, action="store_true")
+    parser.add_argument("--major", dest="major", default=False, action="store_true")
+    opt, args = parser.parse_args()
     main(opt.message, opt.major, opt.minor, opt.patch)

@@ -50,11 +50,11 @@ def main(source, dump_modules, dump_workspaces):
         )
 
 if __name__ == '__main__':
-    from optparse import OptionParser
-    p = OptionParser()
-    p.add_option("-s", "--source")
-    p.add_option("-m", "--modules", default=False, action="store_true")
-    p.add_option("-w", "--workspaces", default=False, action="store_true")
-    opt, args = p.parse_args()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-s", "--source", required=True)
+    parser.add_argument("-m", "--modules", action="store_true", default=False)
+    parser.add_argument("-w", "--workspaces", action="store_true", default=False)
+    args = parser.parse_args()
 
-    main(opt.source, opt.modules, opt.workspaces)
+    main(args.source, args.modules, args.workspaces)

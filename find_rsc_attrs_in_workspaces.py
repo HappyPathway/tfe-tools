@@ -34,15 +34,15 @@ def main(terraform_org, terraform_url, resource_type, attrs, base_dir="./reports
     return statefiles
 
 if __name__ == '__main__':
-    from optparse import OptionParser
-    p = OptionParser()
-    p.add_option("--org", dest="terraform_org", default="clover")
-    p.add_option("--url", dest="terraform_url", default="terraform.corp.clover.com")
-    p.add_option("--type",dest="resource_type")
-    p.add_option("--attr", action="append")
-    p.add_option("--output", default=os.path.join(os.path.dirname(__file__), "reports/resources"))
-    opt, args = p.parse_args()
-    data = main(opt.terraform_org, opt.terraform_url, opt.resource_type, opt.attr)
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--org", dest="terraform_org", default="clover")
+    parser.add_argument("--url", dest="terraform_url", default="terraform.corp.clover.com")
+    parser.add_argument("--type",dest="resource_type")
+    parser.add_argument("--attr", action="append")
+    parser.add_argument("--output", default=os.path.join(os.path.dirname(__file__), "reports/resources"))
+    args = parser.parse_args()
+    data = main(args.terraform_org, args.terraform_url, args.resource_type, args.attr)
     workspace_dict = defaultdict(lambda: defaultdict(list))
     for k, v in data.items():
         for resource in v:
@@ -50,7 +50,7 @@ if __name__ == '__main__':
                 if resource.get(attr) not in workspace_dict[k][attr]:
                     workspace_dict[k][attr].append(resource.get(attr))
     
-    with open(os.path.join(opt.output, f"{opt.resource_type}.json"), 'w') as output:
+    with open(os.path.join(args.output, f"{args.resource_type}.json"), 'w') as output:
         output.write(
             json.dumps(
                 workspace_dict,

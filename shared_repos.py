@@ -74,13 +74,12 @@ def main(terraform_url, terraform_org, github_base, basedir, git_namespace):
         )
 
 if __name__ == "__main__":
-    from optparse import OptionParser
-    p = OptionParser()
-    p.add_option("-t", dest="terraform_url", default="terraform.corp.clover.com")
-    p.add_option("-o", dest="terraform_org", default="clover")
-    p.add_option("-g", dest="github_base",   default="https://github.corp.clover.com")
-    p.add_option("-n", dest="git_namespace", default="clover")
-    p.add_option("-b", dest='base_dir',      default=mkdtemp(prefix="/tmp/"))
-    opt, arg = p.parse_args()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-t", dest="terraform_url", default="terraform.corp.clover.com")
+    parser.add_argument("-o", dest="terraform_org", default="clover")
+    parser.add_argument("-g", dest="github_base",   default="https://github.corp.clover.com")
+    parser.add_argument("-n", dest="git_namespace", default="clover")
+    parser.add_argument("-b", dest='base_dir',      default=mkdtemp(prefix="/tmp/"))
+    opt, arg = parser.parse_args()
     main(opt.terraform_url, opt.terraform_org, opt.github_base, opt.base_dir, opt.git_namespace)
-    
