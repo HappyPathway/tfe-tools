@@ -1,5 +1,2 @@
-#### How to use this file: https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
-#### Example file: https://github.corp.clover.com/clover/examples-repo/blob/main/CODEOWNERS
-
 # These owners will be the default owners for everything in the repo. Unless a later match takes precedence
-*     @clover/nit
+*     @HappyPathway/terraform-reviewers
