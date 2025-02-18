@@ -26,6 +26,68 @@ class TFEException(Exception):
         super().__init__(msg)
 
 
+class Workspace:
+    def __init__(self, workspace_name, organization):
+        self.workspace_name = workspace_name
+        self.organization = organization
+        self.session = self._create_session()
+
+    def _create_session(self):
+        token = self._get_token()
+        session = Session()
+        session.headers = {
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/vnd.api+json"
+        }
+        return session
+
+    def _get_token(self):
+        config_path = os.path.join(os.environ.get("HOME"), ".terraformrc")
+        with open(config_path, 'r') as fp:
+            obj = hcl2.load(fp)
+        return obj.get('credentials')[0].get("terraform.corp.clover.com").get('token')
+
+    def get_state(self):
+        url = f"https://terraform.corp.clover.com/api/v2/state-versions"
+        url_params = {
+            "filter[organization][name]": self.organization,
+            "filter[workspace][name]": self.workspace_name
+        }
+        resp = self.session.get(url, params=urlencode(url_params, quote_via=quote_plus))
+        data = resp.json()
+        try:
+            last_state = data.get('data')[0]
+        except IndexError:
+            return None
+        state_url = last_state.get('attributes').get('hosted-state-download-url')
+        state_resp = self.session.get(state_url)
+        state_data = state_resp.json()
+        return state_data
+
+    def list_resources(self):
+        state = self.get_state()
+        if not state:
+            return []
+        return state.get('resources', [])
+
+    def find_dependencies(self):
+        state = self.get_state()
+        if not state:
+            return set()
+        return self._find_all_references(state)
+
+    def _find_all_references(self, state):
+        workspaces = set()
+        for rsc in state.get('resources'):
+            if rsc.get('mode') != 'data':
+                continue
+            if rsc.get('type') != 'terraform_remote_state':
+                continue
+            for instance in rsc.get('instances'):
+                workspaces.add(instance.get('attributes').get('config').get('value').get('workspaces').get('name'))
+        return workspaces
+
+
 def tfe_token(tfe_api, config):
     if sanitize_path(config):
         with open(sanitize_path(config), 'r') as fp:
@@ -91,7 +153,8 @@ def main(terraform_url, terraform_org, check):
     org = Organization(terraform_org)
     ws = org.workspaces()
     for x in sorted(ws, key=lambda ws: ws.name):
-        if not x.vcs_repo:
+        workspace = Workspace(x.name, terraform_org)
+        if not workspace.vcs_repo:
             workspaces["not_vcs_backed"].append(x.name)
         else:
             workspaces["vcs_backed"].append(x.name)
