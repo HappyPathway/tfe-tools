@@ -30,17 +30,66 @@ class TFEException(Exception):
         super().__init__(msg)
 
 
-def tfe_token(tfe_api, config):
-    if sanitize_path(config):
-        with open(sanitize_path(config), 'r') as fp:
+class Workspace:
+    def __init__(self, workspace_name, organization):
+        self.workspace_name = workspace_name
+        self.organization = organization
+        self.session = self._create_session()
+
+    def _create_session(self):
+        token = self._get_token()
+        session = Session()
+        session.headers = {
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/vnd.api+json"
+        }
+        return session
+
+    def _get_token(self):
+        config_path = os.path.join(os.environ.get("HOME"), ".terraformrc")
+        with open(config_path, 'r') as fp:
             obj = hcl2.load(fp)
-        return obj.get('credentials')[0].get(tfe_api).get('token')
-    elif sanitize_path("${HOME}/.terraform.d/credentials.tfrc.json"):
-        with open(sanitize_path("${HOME}/.terraform.d/credentials.tfrc.json"), 'r') as fp:
-            d = json.loads(fp.read())
-            return d.get('credentials').get(tfe_api).get('token')
-    else:
-        raise TFEException("Could not find credentials file")
+        return obj.get('credentials')[0].get("terraform.corp.clover.com").get('token')
+
+    def get_state(self):
+        url = f"https://terraform.corp.clover.com/api/v2/state-versions"
+        url_params = {
+            "filter[organization][name]": self.organization,
+            "filter[workspace][name]": self.workspace_name
+        }
+        resp = self.session.get(url, params=urlencode(url_params, quote_via=quote_plus))
+        data = resp.json()
+        try:
+            last_state = data.get('data')[0]
+        except IndexError:
+            return None
+        state_url = last_state.get('attributes').get('hosted-state-download-url')
+        state_resp = self.session.get(state_url)
+        state_data = state_resp.json()
+        return state_data
+
+    def list_resources(self):
+        state = self.get_state()
+        if not state:
+            return []
+        return state.get('resources', [])
+
+    def find_dependencies(self):
+        state = self.get_state()
+        if not state:
+            return set()
+        return self._find_all_references(state)
+
+    def _find_all_references(self, state):
+        workspaces = set()
+        for rsc in state.get('resources'):
+            if rsc.get('mode') != 'data':
+                continue
+            if rsc.get('type') != 'terraform_remote_state':
+                continue
+            for instance in rsc.get('instances'):
+                workspaces.add(instance.get('attributes').get('config').get('value').get('workspaces').get('name'))
+        return workspaces
 
 
 def sanitize_path(config):
@@ -64,29 +113,9 @@ def clone(repo_clone_url):
         raise GitException("Could not clone {0}".format(repo_clone_url))
 
 
-def get_state(tkn, workspace_name, terraform_url="terraform.corp.clover.com", terraform_org="clover"):
-    tfe_session = Session()
-    tfe_session.headers = {
-        "Authorization": "Bearer {0}".format(tkn), 
-        "Content-Type": "application/vnd.api+json"
-    }
-    url = "https://{0}/api/v2/state-versions".format(terraform_url)
-    url_params = {
-        "filter[organization][name]": terraform_org,
-        "filter[workspace][name]": workspace_name
-    }
-    resp = tfe_session.get(url, params=urlencode(url_params, quote_via=quote_plus))
-    data = resp.json()
-    if not len(data.get('data')):
-        return dict()
-    last_state = data.get('data')[0]
-    state_url = last_state.get('attributes').get('hosted-state-download-url')
-    state_resp = tfe_session.get(state_url)
-    state_data = state_resp.json()
-    return state_data
-
 def dependencies(tkn, ws_name):
-    state = get_state(tkn, ws_name)
+    workspace = Workspace(ws_name, "clover")
+    state = workspace.get_state()
     found_modules = set()
     projects = get_projects(state)
     workspace_projects[ws_name] = projects
@@ -135,12 +164,7 @@ def main(terraform_url, terraform_org, github_base, basedir, git_namespace):
     )
 
     try:
-        tkn = tfe_token(terraform_url, 
-            os.path.join(
-                os.environ.get("HOME"), 
-                ".terraformrc"
-            )
-        )
+        tkn = Workspace._get_token()
     except TFEException:
         sys.stderr.write("Could not find credentials file. exiting.\n")
         sys.exit(1)
@@ -205,4 +229,3 @@ if __name__ == "__main__":
     p.add_option("-b", dest='base_dir',      default=mkdtemp(prefix="/tmp/"))
     opt, arg = p.parse_args()
     main(opt.terraform_url, opt.terraform_org, opt.github_base, opt.base_dir, opt.git_namespace)
-    
